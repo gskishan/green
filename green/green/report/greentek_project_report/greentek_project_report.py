@@ -63,13 +63,21 @@ def get_columns():
 		},
 	]
 
-
-def get_data(filters):
+def get_conditions(filters):
 	conditions = ""
-	
+
 	if filters.get("status"):
 		conditions += " and pj.status = %(status)s"
-		
+	if filters.get("from_date"):
+		conditions += " and date(pj.creation)>=%(from_date)s"
+	if filters.get("to_date"):
+		conditions += " and date(pj.creation)<=%(to_date)s"
+
+	return conditions
+
+def get_data(filters):
+	conditions = get_conditions(filters)
+	
 	data = frappe.db.sql("""
         SELECT
             pj.name,
