@@ -10,5 +10,15 @@ frappe.query_reports["Greentek Project Report"] = {
 			"fieldtype": "Select",
 			"options":"\nOpen\nCompleted\nCancelled"
 		},
+		{
+			"fieldname":"from_date",
+			"label": __("From Date"),
+			"fieldtype": "Date",
+		},
+		{
+			"fieldname":"to_date",
+			"label": __("To Date"),
+			"fieldtype": "Date",
+		},
 	]
 };
