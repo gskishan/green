@@ -13,6 +13,12 @@ frappe.query_reports["Customer Last Order"] = {
 			"options": "Sales Order\nSales Invoice"
 		},
 		{
+			"fieldname":"company",
+			"label": __("Company"),
+			"fieldtype": "Link",
+			"options": "Company"
+		},
+		{
 			"fieldname":"from_date",
 			"label": __("From Date"),
 			"fieldtype": "Date",

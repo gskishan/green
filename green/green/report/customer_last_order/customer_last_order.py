@@ -34,7 +34,12 @@ def get_sales_details(doctype,filters):
 			DATEDIFF(CURRENT_DATE, max(so.transaction_date)) as 'days_since_last_order'"""
 	
 	date_filter = ""
+	company_filter = "" 
 	date_params = []
+
+	if filters.get("company"):
+		company = filters.get("company")
+		company_filter = f"AND so.company = '{company}'"
 			
 	if filters.get("from_date") and filters.get("to_date"):
 
@@ -53,6 +58,7 @@ def get_sales_details(doctype,filters):
 	FROM `tabCustomer` cust, `tab{doctype}` so
 	WHERE cust.name = so.customer
 	AND so.docstatus = 1
+	{company_filter}
 	{date_filter}
 	GROUP BY cust.name
 	ORDER BY 'days_since_last_order' DESC"""
