@@ -34,6 +34,9 @@ app_license = "MIT"
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
+doctype_js = {"ToDo" : "public/js/todo.js",
+              "Stock Entry": "public/js/stock_entry.js"}
+
 # Home Pages
 # ----------
 
@@ -118,13 +121,11 @@ app_license = "MIT"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-#	"*": {
-#		"on_update": "method",
-#		"on_cancel": "method",
-#		"on_trash": "method"
-#	}
-# }
+doc_events = {
+    "Stock Entry":{
+        "validate":"green.green.custom.stock_entry.validate"
+    }
+}
 
 # Scheduled Tasks
 # ---------------
