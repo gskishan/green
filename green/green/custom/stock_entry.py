@@ -3,11 +3,11 @@ import frappe
 
 @frappe.whitelist()
 def validate(doc, method):
-    if doc.customer:
+    if doc.custom_customer:
         addr_links = frappe.db.get_value("Dynamic Link", {
             "parenttype": "Address",
             "link_doctype": "Customer",
-            "link_name": doc.customer
+            "link_name": doc.custom_customer
         }, "parent")
         if addr_links:
             addr_doc = frappe.get_doc("Address", addr_links)
