@@ -121,11 +121,12 @@ doctype_js = {"ToDo" : "public/js/todo.js",
 # ---------------
 # Hook on document methods and events
 
-doc_events = {
-    "Stock Entry":{
-        "validate":"green.green.custom.stock_entry.validate"
-    }
-}
+# doc_events = {
+#     "Stock Entry":{
+#         "validate":"green.green.custom.stock_entry.validate",
+                        
+#     }
+# }
 
 # Scheduled Tasks
 # ---------------
