@@ -151,7 +151,7 @@ def get_columns():
 			{
 			'label': _('Activity'),
 			'fieldname': "activity",
-			'fieldtype': 'HTML Editor',
+			'fieldtype': 'Text Editor',
 			'width': 320
 		},
 		
