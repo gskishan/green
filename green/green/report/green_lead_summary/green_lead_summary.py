@@ -54,8 +54,29 @@ def execute(filters=None):
 	frappe.errprint(sql)
 	columns = get_columns()
 	data=frappe.db.sql(sql,as_dict=1)
-	if data:
-		return columns, data
+	result=[]
+	for row in data:
+		entry = {
+			'owner': row.owner,
+			'company': row.company,
+			'lead_owner': row.lead_owner,
+			'lead': row.lead,
+			'lead_name': row.lead_name,
+			'source': row.source,
+			'date': row.date,
+			'activity':remove_html_tags(row.activity) if row.activity else "",
+			'follow_up_date': row.follow_up_date,
+			'comment': row.comment,
+			'territory': row.territory,
+			'state': row.state,
+			'pincode': row.pincode,
+			'city': row.city,
+			'status': row.status,
+			'custom_sales_person': row.custom_sales_person
+		}
+		result.append(entry)
+	if result:
+		return columns, result
 	else:
 		columns, data = [], []
 
@@ -73,6 +94,15 @@ def get_conditions(filters):
 		condition=condition+' and territory="{0}" '.format(filters.get("territory"))
 	return condition
 
+import re
+
+def remove_html_tags(text=None):
+		clean = re.compile('<.*?>')
+		return re.sub(clean, '', text)
+
+
+
+
 
 def get_columns():
 	columns=[]
@@ -86,31 +116,31 @@ def get_columns():
 		},
 		{
 	 		'fieldname': 'lead_owner',
-            'label':('Lead Owner'),
-            'fieldtype': 'Link',
-            'options': 'User',
+			'label':('Lead Owner'),
+			'fieldtype': 'Link',
+			'options': 'User',
 			'width': 200
-        },
+		},
 		{
 	 		'fieldname': 'custom_sales_person',
-            'label':('Sales Person'),
-            'fieldtype': 'Link',
-            'options': 'Sales Person',
+			'label':('Sales Person'),
+			'fieldtype': 'Link',
+			'options': 'Sales Person',
 			'width': 200
-        },
+		},
 		{
 	 		'fieldname': 'lead',
-            'label':('Lead'),
-            'fieldtype': 'Link',
-            'options': 'Lead',
+			'label':('Lead'),
+			'fieldtype': 'Link',
+			'options': 'Lead',
 			'width': 200
-        },
+		},
 		{
 	 		'fieldname': 'lead_name',
-            'label':('Lead Name'),
-            'fieldtype': 'Data',
+			'label':('Lead Name'),
+			'fieldtype': 'Data',
 			'width': 200
-        },
+		},
 		{
 			'label': _('State'),
 			'fieldname': "state",
@@ -131,11 +161,11 @@ def get_columns():
 		},
 		{
 	 		'fieldname': 'territory',
-            'label':('Territory'),
-            'fieldtype': 'Link',
-            'options': 'Territory',
+			'label':('Territory'),
+			'fieldtype': 'Link',
+			'options': 'Territory',
 			'width': 140
-        },
+		},
 			{
 			'label': _('Source'),
 			'fieldname': "source",
@@ -155,12 +185,12 @@ def get_columns():
 			'width': 320
 		},
 		
-        {
-            'fieldname': "follow_up_date",
-            'label': ('Follow Up Date'),
-            'fieldtype': 'Date',
+		{
+			'fieldname': "follow_up_date",
+			'label': ('Follow Up Date'),
+			'fieldtype': 'Date',
 			'width': 140
-        },
+		},
 		
 		{
 			'label': _('Comment'),
@@ -168,7 +198,7 @@ def get_columns():
 			'fieldtype': 'Data',
 			'width': 220
 		},
-      
+	  
 	]
 	return columns
 
