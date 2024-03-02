@@ -35,7 +35,9 @@ doctype_list_js = {"Item" : "public/js/item/item_list.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
 doctype_js = {"ToDo" : "public/js/todo.js",
-              "Stock Entry": "public/js/stock_entry.js"}
+              "Stock Entry": "public/js/stock_entry.js",
+             "Employee Checkin":"public/js/employee_checkin.js"
+             }
 
 # Home Pages
 # ----------
