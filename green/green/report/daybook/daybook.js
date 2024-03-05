@@ -1,7 +1,7 @@
 // Copyright (c) 2024, kushdhallod@gmail.com and contributors
 // For license information, please see license.txt
 
-frappe.query_reports["General Ledger Greentek"] = {
+frappe.query_reports["Daybook"] = {
 	"filters": [
 		{
 			"fieldname":"company",
@@ -21,7 +21,7 @@ frappe.query_reports["General Ledger Greentek"] = {
 			"fieldname":"from_date",
 			"label": __("From Date"),
 			"fieldtype": "Date",
-			"default": frappe.datetime.add_months(frappe.datetime.get_today(), -1),
+			"default": frappe.datetime.get_today(),
 			"reqd": 1,
 			"width": "60px"
 		},
@@ -213,5 +213,3 @@ frappe.query_reports["General Ledger Greentek"] = {
 
 	]
 };
-
-erpnext.utils.add_dimensions('General Ledger', 15)
