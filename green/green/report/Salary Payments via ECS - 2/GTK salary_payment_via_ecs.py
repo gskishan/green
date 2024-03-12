@@ -39,6 +39,12 @@ def get_columns(filters):
 			"width": 180,
 		},
 		{
+			"label" : _("IFSC Code"),
+			"fieldname" : "custom_ifsc_code",
+			"fieldtype" : "Data".
+			"width" : 140,
+		},
+		{
 			"label": _("Net Pay"),
 			"fieldname": "net_pay",
 			"fieldtype": "Currency",
