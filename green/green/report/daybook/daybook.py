@@ -577,10 +577,9 @@ def get_columns(filters):
 		{"label": _("Posting Date"), "fieldname": "posting_date", "fieldtype": "Date", "width": 120},
 		{"label": _("Created On"), "fieldname": "creation", "fieldtype": "Date", "width": 120},
 		{
-			"label": _("Account"),
-			"fieldname": "account",
-			"fieldtype": "Link",
-			"options": "Account",
+			"label": _("Party"),
+			"fieldname": "party",
+			"fieldtype": "Data",
 			"width": 320,
 		},
 		{
