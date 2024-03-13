@@ -519,6 +519,8 @@ def get_result_as_list(data, filters):
 	balance, balance_in_account_currency = 0, 0
 	inv_details = get_supplier_invoice_details()
 
+	prev_voucher = ''
+	resultant_data = []
 	for d in data:
 		if not d.get("creation"):
 			balance, balance_in_account_currency = 0, 0
@@ -528,8 +530,12 @@ def get_result_as_list(data, filters):
 
 		d["account_currency"] = filters.account_currency
 		d["bill_no"] = inv_details.get(d.get("against_voucher"), "")
-
-	return data
+		if d.voucher_no != None and d.voucher_no != "" and d.voucher_no == prev_voucher and prev_voucher != None :
+			prev_voucher = d.voucher_no
+		else:
+			resultant_data.append(d)
+		prev_voucher = d.voucher_no
+	return resultant_data
 
 
 def get_supplier_invoice_details():
@@ -634,7 +640,7 @@ def get_columns(filters):
 	]
 
 	columns.append(
-		{"label": _("Created By"), "options": "User", "fieldname": "owner", "width": 140}
+		{"label": _("Created By"), "options": "User", "fieldtype": "Link", "fieldname": "owner", "width": 140}
 	)
 
 	return columns
