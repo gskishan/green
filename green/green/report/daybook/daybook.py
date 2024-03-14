@@ -530,6 +530,13 @@ def get_result_as_list(data, filters):
 
 		d["account_currency"] = filters.account_currency
 		d["bill_no"] = inv_details.get(d.get("against_voucher"), "")
+		if d.voucher_type == "Purchase Receipt":
+			pur_receipt = frappe.get_doc("Purchase Receipt", d.voucher_no)
+			d["party"] = pur_receipt.supplier
+		elif d.voucher_type == "Delivery Note":
+			delivery_note = frappe.get_doc("Delivery Note", d.voucher_no)
+			d["party"] = delivery_note.customer
+
 		if d.voucher_no != None and d.voucher_no != "" and d.voucher_no == prev_voucher and prev_voucher != None :
 			prev_voucher = d.voucher_no
 		else:
@@ -574,8 +581,9 @@ def get_columns(filters):
 			"options": "GL Entry",
 			"hidden": 1,
 		},
-		{"label": _("Posting Date"), "fieldname": "posting_date", "fieldtype": "Date", "width": 120},
 		{"label": _("Created On"), "fieldname": "creation", "fieldtype": "Date", "width": 120},
+		{"label": _("Posting Date"), "fieldname": "posting_date", "fieldtype": "Date", "width": 120},
+		{"label": _("Voucher Type"), "fieldname": "voucher_type", "width": 140},
 		{
 			"label": _("Party"),
 			"fieldname": "party",
@@ -594,41 +602,6 @@ def get_columns(filters):
 			"fieldtype": "Float",
 			"width": 130,
 		},
-	]
-
-	if filters.get("add_values_in_transaction_currency"):
-		columns += [
-			{
-				"label": _("Debit (Transaction)"),
-				"fieldname": "debit_in_transaction_currency",
-				"fieldtype": "Currency",
-				"width": 130,
-				"options": "transaction_currency",
-			},
-			{
-				"label": _("Credit (Transaction)"),
-				"fieldname": "credit_in_transaction_currency",
-				"fieldtype": "Currency",
-				"width": 130,
-				"options": "transaction_currency",
-			},
-			{
-				"label": "Transaction Currency",
-				"fieldname": "transaction_currency",
-				"fieldtype": "Link",
-				"options": "Currency",
-				"width": 70,
-			},
-		]
-
-	columns += [
-		{"label": _("Voucher Type"), "fieldname": "voucher_type", "width": 120},
-		{
-			"label": _("Voucher Subtype"),
-			"fieldname": "voucher_subtype",
-			"fieldtype": "Data",
-			"width": 140,
-		},
 		{
 			"label": _("Voucher No"),
 			"fieldname": "voucher_no",
@@ -636,10 +609,7 @@ def get_columns(filters):
 			"options": "voucher_type",
 			"width": 180,
 		},
-	]
-
-	columns.append(
 		{"label": _("Created By"), "options": "User", "fieldtype": "Link", "fieldname": "owner", "width": 140}
-	)
+	]
 
 	return columns
