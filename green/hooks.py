@@ -219,3 +219,17 @@ doctype_js = {"ToDo" : "public/js/todo.js",
 # auth_hooks = [
 #	"green.auth.validate"
 # ]
+fixtures=[
+     {
+        "dt": "Custom Field", 
+        "filters": {
+            "module": ["in", ["Green"]]
+        }
+    },
+    {
+        "dt": "Property Setter", 
+        "filters": {
+            "module": ["in", ["Green"]]
+        }
+    }
+]
