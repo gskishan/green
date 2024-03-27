@@ -530,18 +530,19 @@ def get_result_as_list(data, filters):
 
 		d["account_currency"] = filters.account_currency
 		d["bill_no"] = inv_details.get(d.get("against_voucher"), "")
-		if d.voucher_type == "Purchase Receipt":
-			pur_receipt = frappe.get_doc("Purchase Receipt", d.voucher_no)
-			d["party"] = pur_receipt.supplier
-		elif d.voucher_type == "Delivery Note":
-			delivery_note = frappe.get_doc("Delivery Note", d.voucher_no)
-			d["party"] = delivery_note.customer
+		if "voucher_type" in d:
+			if d.voucher_type == "Purchase Receipt":
+				pur_receipt = frappe.get_doc("Purchase Receipt", d.voucher_no)
+				d["party"] = pur_receipt.supplier
+			elif d.voucher_type == "Delivery Note":
+				delivery_note = frappe.get_doc("Delivery Note", d.voucher_no)
+				d["party"] = delivery_note.customer
 
-		if d.voucher_no != None and d.voucher_no != "" and d.voucher_no == prev_voucher and prev_voucher != None :
+			if d.voucher_no != None and d.voucher_no != "" and d.voucher_no == prev_voucher and prev_voucher != None :
+				prev_voucher = d.voucher_no
+			else:
+				resultant_data.append(d)
 			prev_voucher = d.voucher_no
-		else:
-			resultant_data.append(d)
-		prev_voucher = d.voucher_no
 	return resultant_data
 
 
