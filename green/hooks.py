@@ -38,7 +38,8 @@ doctype_js = {
     "ToDo" : "public/js/todo.js",
     "Stock Entry": "public/js/stock_entry.js",
     "Employee Checkin":"public/js/employee_checkin.js",
-    "Expense Claim": "public/js/expense_claim.js"
+    "Expense Claim": "public/js/expense_claim.js",
+    "Payment Entry": "public/js/payment_entry.js" 
 }
 
 # Home Pages
