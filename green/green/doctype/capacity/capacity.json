@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:capacity_kw",
  "creation": "2024-05-06 16:29:42.230763",
  "default_view": "List",
  "doctype": "DocType",
@@ -13,15 +14,17 @@
   {
    "fieldname": "capacity_kw",
    "fieldtype": "Data",
-   "label": "Capacity (KW)"
+   "label": "Capacity (KW)",
+   "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-05-06 16:29:42.230763",
+ "modified": "2024-05-07 14:30:27.644666",
  "modified_by": "Administrator",
  "module": "Green",
  "name": "Capacity",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {

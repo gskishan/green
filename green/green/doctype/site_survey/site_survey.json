@@ -2,55 +2,40 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "format:{Site Survey}-{#####}",
- "creation": "2024-05-06 13:01:55.947740",
- "default_view": "List",
+ "creation": "2024-05-07 16:06:16.899916",
  "doctype": "DocType",
- "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "self",
-  "site_visitor",
-  "customer",
+  "section_break_zdcf",
+  "amended_from",
+  "custom_self",
+  "custom_site_visitor",
+  "customer_name",
   "customer_number",
   "poc_name",
   "poc_contact",
   "site_location",
-  "google_map_location",
-  "column_break_yioui",
+  "column_break_mpxf",
+  "custom_google_map_location",
   "opportunity_name",
   "site_survey_status",
-  "project",
+  "custom_project",
   "opportunity_owner",
   "sales_person",
   "department",
   "site_engineer",
   "site_engineer_name",
-  "section_break_ycske",
+  "section_break_pxjm",
   "hand_sketch",
-  "column_break_nqpc9",
+  "column_break_hgpx",
   "site_photos",
-  "column_break_qryma",
-  "site_survey_report",
-  "amended_from"
+  "column_break_svex",
+  "site_survey_report"
  ],
  "fields": [
   {
-   "fieldname": "site_engineer",
-   "fieldtype": "Link",
-   "label": "Site Engineer",
-   "options": "Employee"
-  },
-  {
-   "fieldname": "site_photos",
-   "fieldtype": "Table",
-   "label": "Site Photos",
-   "options": "Site Photos"
-  },
-  {
-   "fieldname": "site_survey_report",
-   "fieldtype": "Table",
-   "label": "Site Survey Report",
-   "options": "Site Survey Report"
+   "fieldname": "section_break_zdcf",
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "amended_from",
@@ -59,41 +44,23 @@
    "no_copy": 1,
    "options": "Site Survey",
    "print_hide": 1,
-   "read_only": 1
+   "read_only": 1,
+   "search_index": 1
   },
   {
-   "fieldname": "opportunity_name",
-   "fieldtype": "Link",
-   "label": "Opportunity Name",
-   "options": "Opportunity"
+   "fieldname": "customer_number",
+   "fieldtype": "Data",
+   "label": "Customer number"
   },
   {
-   "fieldname": "column_break_yioui",
-   "fieldtype": "Column Break"
+   "fieldname": "poc_name",
+   "fieldtype": "Data",
+   "label": "POC Name"
   },
   {
-   "fieldname": "section_break_ycske",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "column_break_nqpc9",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_qryma",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "hand_sketch",
-   "fieldtype": "Table",
-   "label": "Hand Sketch",
-   "options": "Attachment Table"
-  },
-  {
-   "fieldname": "department",
-   "fieldtype": "Link",
-   "label": "Department",
-   "options": "Department"
+   "fieldname": "poc_contact",
+   "fieldtype": "Data",
+   "label": "POC Contact"
   },
   {
    "fieldname": "site_location",
@@ -101,64 +68,22 @@
    "label": "Site Location"
   },
   {
-   "fetch_from": "site_engineer.employee_name",
-   "fieldname": "site_engineer_name",
-   "fieldtype": "Data",
-   "label": "Site Engineer Name"
+   "fieldname": "column_break_mpxf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "opportunity_name",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "label": "Opportunity Name",
+   "options": "Opportunity"
   },
   {
    "fieldname": "site_survey_status",
    "fieldtype": "Select",
    "label": "Site Survey Status",
    "options": "\nSite Survey Assigned\nSite Survey Completed"
-  },
-  {
-   "default": "0",
-   "fieldname": "self",
-   "fieldtype": "Check",
-   "label": "Self"
-  },
-  {
-   "fieldname": "site_visitor",
-   "fieldtype": "Link",
-   "label": "Site Visitor",
-   "options": "User"
-  },
-  {
-   "fieldname": "customer",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Customer",
-   "translatable": 1
-  },
-  {
-   "fieldname": "customer_number",
-   "fieldtype": "Data",
-   "label": "Customer number",
-   "translatable": 1
-  },
-  {
-   "fieldname": "poc_name",
-   "fieldtype": "Data",
-   "label": "POC Name",
-   "translatable": 1
-  },
-  {
-   "fieldname": "poc_contact",
-   "fieldtype": "Data",
-   "label": "POC Contact",
-   "translatable": 1
-  },
-  {
-   "fieldname": "google_map_location",
-   "fieldtype": "Attach",
-   "label": "Google Map Location"
-  },
-  {
-   "fieldname": "project",
-   "fieldtype": "Link",
-   "label": "Project",
-   "options": "Project"
   },
   {
    "fieldname": "opportunity_owner",
@@ -170,17 +95,97 @@
    "fieldtype": "Link",
    "label": "Sales Person",
    "options": "Sales Person"
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "site_engineer",
+   "fieldtype": "Link",
+   "label": "Site Engineer",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "site_engineer.employee_name",
+   "fieldname": "site_engineer_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Site Engineer Name"
+  },
+  {
+   "default": "0",
+   "fieldname": "custom_self",
+   "fieldtype": "Check",
+   "label": "Self"
+  },
+  {
+   "fieldname": "section_break_pxjm",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "hand_sketch",
+   "fieldtype": "Table",
+   "label": "Hand Sketch",
+   "options": "Attachment Table"
+  },
+  {
+   "fieldname": "site_photos",
+   "fieldtype": "Table",
+   "label": "Site Photos",
+   "options": "Site Photos"
+  },
+  {
+   "fieldname": "column_break_hgpx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "site_survey_report",
+   "fieldtype": "Table",
+   "label": "Site Survey Report",
+   "options": "Site Survey Report"
+  },
+  {
+   "fieldname": "column_break_svex",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "custom_site_visitor",
+   "fieldtype": "Link",
+   "label": "Site Visitor",
+   "options": "User"
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Customer",
+   "translatable": 1
+  },
+  {
+   "fieldname": "custom_google_map_location",
+   "fieldtype": "Attach",
+   "label": "Google Map Location"
+  },
+  {
+   "fieldname": "custom_project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [
   {
+   "group": "Designing",
    "link_doctype": "Designing",
    "link_fieldname": "site_survey"
   }
  ],
- "modified": "2024-05-07 14:00:27.566393",
+ "modified": "2024-05-07 16:40:01.543058",
  "modified_by": "Administrator",
  "module": "Green",
  "name": "Site Survey",
@@ -197,6 +202,7 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],

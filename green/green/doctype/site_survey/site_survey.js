@@ -1,3 +1,6 @@
+// Copyright (c) 2024, kushdhallod@gmail.com and contributors
+// For license information, please see license.txt
+
 frappe.ui.form.on("Site Survey", {
     refresh: function(frm) {
     
@@ -15,7 +18,6 @@ frappe.ui.form.on("Site Survey", {
 
             });
         }, __('Create'));
-
         frm.fields_dict['site_engineer'].get_query = function(doc, cdt, cdn) {
             return {
                 filters: {
@@ -23,7 +25,6 @@ frappe.ui.form.on("Site Survey", {
                 }
             };
         };
-        
         frm.fields_dict['department'].df.onchange = function() {
             frm.set_value('site_engineer', '');
             frm.refresh_field('site_engineer');
@@ -31,5 +32,3 @@ frappe.ui.form.on("Site Survey", {
     },
    
 });
-
-
