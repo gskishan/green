@@ -8,13 +8,23 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "department",
-  "site_engineer",
-  "site_engineer_name",
+  "self",
+  "site_visitor",
+  "customer",
+  "customer_number",
+  "poc_name",
+  "poc_contact",
   "site_location",
+  "google_map_location",
   "column_break_yioui",
   "opportunity_name",
   "site_survey_status",
+  "project",
+  "opportunity_owner",
+  "sales_person",
+  "department",
+  "site_engineer",
+  "site_engineer_name",
   "section_break_ycske",
   "hand_sketch",
   "column_break_nqpc9",
@@ -101,6 +111,65 @@
    "fieldtype": "Select",
    "label": "Site Survey Status",
    "options": "\nSite Survey Assigned\nSite Survey Completed"
+  },
+  {
+   "default": "0",
+   "fieldname": "self",
+   "fieldtype": "Check",
+   "label": "Self"
+  },
+  {
+   "fieldname": "site_visitor",
+   "fieldtype": "Link",
+   "label": "Site Visitor",
+   "options": "User"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Customer",
+   "translatable": 1
+  },
+  {
+   "fieldname": "customer_number",
+   "fieldtype": "Data",
+   "label": "Customer number",
+   "translatable": 1
+  },
+  {
+   "fieldname": "poc_name",
+   "fieldtype": "Data",
+   "label": "POC Name",
+   "translatable": 1
+  },
+  {
+   "fieldname": "poc_contact",
+   "fieldtype": "Data",
+   "label": "POC Contact",
+   "translatable": 1
+  },
+  {
+   "fieldname": "google_map_location",
+   "fieldtype": "Attach",
+   "label": "Google Map Location"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "fieldname": "opportunity_owner",
+   "fieldtype": "Data",
+   "label": "Opportunity Owner"
+  },
+  {
+   "fieldname": "sales_person",
+   "fieldtype": "Link",
+   "label": "Sales Person",
+   "options": "Sales Person"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -111,7 +180,7 @@
    "link_fieldname": "site_survey"
   }
  ],
- "modified": "2024-05-06 18:20:56.354993",
+ "modified": "2024-05-07 14:00:27.566393",
  "modified_by": "Administrator",
  "module": "Green",
  "name": "Site Survey",
