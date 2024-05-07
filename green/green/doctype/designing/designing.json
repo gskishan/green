@@ -11,14 +11,12 @@
   "designer",
   "designer_name",
   "design",
+  "amended_from",
   "column_break_w4htu",
   "site_survey",
   "opportunity_name",
   "designing_status",
-  "comments",
-  "section_break_sothd",
-  "bom",
-  "amended_from"
+  "comments"
  ],
  "fields": [
   {
@@ -32,12 +30,6 @@
    "fieldtype": "Table",
    "label": "Design",
    "options": "Design"
-  },
-  {
-   "fieldname": "bom",
-   "fieldtype": "Table",
-   "label": "BOM",
-   "options": "Designing Item"
   },
   {
    "fieldname": "amended_from",
@@ -81,16 +73,12 @@
    "fieldname": "comments",
    "fieldtype": "Small Text",
    "label": "Comments"
-  },
-  {
-   "fieldname": "section_break_sothd",
-   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-05-06 17:23:15.853977",
+ "modified": "2024-05-07 12:02:31.476228",
  "modified_by": "Administrator",
  "module": "Green",
  "name": "Designing",

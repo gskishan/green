@@ -70,7 +70,7 @@ frappe.ui.form.on("Opportunity", {
     custom_average_consumption: function(frm) {
         var averageConsumption = frm.doc.custom_average_consumption;
         var recommendedCapacityUOM = averageConsumption / 120;
-        frm.set_value('custom_recommended_capacity_uom', recommendedCapacityUOM.toFixed(2));
+        frm.set_value('custom_recommended_capacity', recommendedCapacityUOM.toFixed(2));
     },
     custom_consumption: function(frm, cdt, cdn) {
         if (frm.doc.custom_consumption == "Detailed"){
