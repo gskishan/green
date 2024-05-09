@@ -1,22 +1,31 @@
 
 
 frappe.ui.form.on("Lead", {
-    status: function(frm) {
-        if (frm.doc.status != "Interested") {
-            frm.remove_custom_button('Opportunity', 'Create');
-        } else {
-            frm.add_custom_button(
-				__("Opportunity"),
-				function () {
-					me.frm.trigger("make_opportunity");
-				},
-				__("Create")
-			);
-        }   
+    refresh(frm) {
+        
+        setTimeout(() => {
+            if (frm.doc.status == "Interested") {
+                    frm.clear_custom_buttons();
+                    frm.add_custom_button(
+                        __("Opportunity"),
+                        function () {
+                            frm.trigger("make_opportunity");
+                        },
+                        __("Create")
+                    );
+            } else {
+                frm.remove_custom_button("Opportunity","Create")
+            }
+        }, 10);
+    
     },
     custom_capacity: function (frm) {
         if (!frm.doc.custom_capacity.endsWith(frm.doc.custom_uom)) {
-            frm.set_value("custom_capacity", frm.doc.custom_capacity + frm.doc.custom_uom)
+            if (frm.doc.custom_capacity.includes(frm.doc.custom_uom)) {
+                frm.set_value("custom_capacity", frm.doc.custom_capacity.split(frm.doc.custom_uom).toString().replaceAll(",",""))
+            } else {
+                frm.set_value("custom_capacity", frm.doc.custom_capacity + frm.doc.custom_uom)
+            }
         }
     },
     custom_customer_category: function (frm) {

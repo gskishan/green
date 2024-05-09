@@ -28,10 +28,7 @@ frappe.ui.form.on("Opportunity", {
 	    setTimeout(() => {
 		    frm.add_custom_button(__(" Customer"),
                 function () {
-                    frappe.model.open_mapped_doc({
-                        method: "green.custom_script.opportunity.custom_make_customer",
-                        frm: cur_frm,
-                    });
+                    frm.trigger("make_customer");
                 },
     		__("Create"));
 	    }, 100);
