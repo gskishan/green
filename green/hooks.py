@@ -42,6 +42,7 @@ doctype_js = {
     "Payment Entry": "public/js/payment_entry.js",
     "Lead": "public/js/lead.js",
     "Opportunity": "public/js/opportunity.js",
+    "Quotation": "public/js/quotation.js"
 }
 
 # Home Pages
