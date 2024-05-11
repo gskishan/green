@@ -121,20 +121,24 @@ doctype_js = {
 # ---------------
 # Override standard doctype classes
 
-# override_doctype_class = {
-#	"ToDo": "custom_app.overrides.CustomToDo"
-# }
+override_doctype_class = {
+	# "ToDo": "custom_app.overrides.CustomToDo"
+	"Project": "green.custom_script.project.CustomProject"
+}
 
 # Document Events
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-#     "Stock Entry":{
-#         "validate":"green.green.custom.stock_entry.validate",
+doc_events = {
+    # "Stock Entry":{
+    #     "validate":"green.green.custom.stock_entry.validate",
                         
-#     }
-# }
+    # }
+    "Sales Order":{
+        "after_insert":"green.green.custom.sales_order.create_project_automatically",
+    }
+}
 
 # Scheduled Tasks
 # ---------------
