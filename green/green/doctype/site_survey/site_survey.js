@@ -30,5 +30,13 @@ frappe.ui.form.on("Site Survey", {
             frm.refresh_field('site_engineer');
         };
     },
-   
+    opportunity_name: async function (frm) {
+        let opportunity = await frappe.db.get_doc("Opportunity", frm.doc.opportunity_name)
+        let lead = await frappe.db.get_doc('Lead', opportunity.party_name)
+
+        frm.set_value("sales_person", lead.custom_sales_person)
+        frm.set_value("poc_name", lead.custom_poc_name)
+        frm.set_value("poc_contact", lead.custom_poc_mobile_no)
+    }
+
 });

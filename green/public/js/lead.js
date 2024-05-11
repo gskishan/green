@@ -20,13 +20,10 @@ frappe.ui.form.on("Lead", {
     
     },
     custom_capacity: function (frm) {
-        if (!frm.doc.custom_capacity.endsWith(frm.doc.custom_uom)) {
-            if (frm.doc.custom_capacity.includes(frm.doc.custom_uom)) {
-                frm.set_value("custom_capacity", frm.doc.custom_capacity.split(frm.doc.custom_uom).toString().replaceAll(",",""))
-            } else {
-                frm.set_value("custom_capacity", frm.doc.custom_capacity + frm.doc.custom_uom)
-            }
-        }
+        setcapacity_with_uom(frm)
+    },
+    custom_uom: function (frm) {
+        setcapacity_with_uom(frm)
     },
     custom_customer_category: function (frm) {
         if (frm.doc.custom_customer_category == "Individual") {
@@ -56,3 +53,18 @@ frappe.ui.form.on("Lead", {
         }
     }
 })
+
+function setcapacity_with_uom(frm) {
+    
+    if (!frm.doc.custom_capacity.endsWith(frm.doc.custom_uom) ) {
+        if (frm.doc.custom_capacity.includes(frm.doc.custom_uom)) {
+            frm.set_value("custom_capacity", frm.doc.custom_capacity.split(frm.doc.custom_uom).toString().replaceAll(",",""))
+        } else {
+            let d = frm.doc.custom_capacity.replace("KW", "")
+            if (frm.doc.custom_capacity.endsWith("LPD")) {
+                d = frm.doc.custom_capacity.replaceAll("LPD", "")
+            }
+            frm.set_value("custom_capacity", d + frm.doc.custom_uom)
+        }
+    }
+}
