@@ -147,7 +147,7 @@
    "description": null,
    "docstatus": 0,
    "dt": "ToDo",
-   "fetch_from": "reference_name.lead_name",
+   "fetch_from": "reference_name.party_name",
    "fetch_if_empty": 0,
    "fieldname": "custom_lead_name",
    "fieldtype": "Data",
