@@ -25,6 +25,6 @@ def custom_link_open_events(ref_doctype, ref_docname, doc):
 	for event in events:
 		event_doc = frappe.get_doc("Event", event.name)
 		event_doc.add_participant(doc.doctype, doc.name)
-		event_doc.owner=frappe.session.user
+		event_doc.event_type='Public'
 		event_doc.save()
 
