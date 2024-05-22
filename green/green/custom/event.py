@@ -5,4 +5,4 @@ import frappe
 
 @frappe.whitelist()
 def validate(self,method=None):
-    frappe.errprint([self.event_type,self.owner)]
+    frappe.errprint([self.event_type,self.owner])
