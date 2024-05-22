@@ -126,12 +126,12 @@ doctype_js = {
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-#     "Stock Entry":{
-#         "validate":"green.green.custom.stock_entry.validate",
+doc_events = {
+    "Event":{
+        "validate":"green.green.custom.event.validate",
                         
-#     }
-# }
+    }
+}
 
 # Scheduled Tasks
 # ---------------
