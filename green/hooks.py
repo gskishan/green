@@ -118,7 +118,8 @@ doctype_js = {
 # ---------------
 # Override standard doctype classes
 override_doctype_class = {
-	"Opportunity": "green.green.custom.opportunity.CustomOpportunity"
+	# "Opportunity": "green.green.custom.opportunity.CustomOpportunity",
+	"Lead": "green.green.custom.lead.CustomLead",
 }
 
 # Document Events
