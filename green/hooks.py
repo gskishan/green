@@ -109,6 +109,9 @@ permission_query_conditions = {
 	"Event": "green.green.custom.opportunity.get_permission_query_conditions",
 }
 
+has_permission = {
+	"Event": "green.green.custom.opportunity.has_permission",
+}
 # permission_query_conditions = {
 #	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
 # }
