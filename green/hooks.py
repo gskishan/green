@@ -117,21 +117,21 @@ doctype_js = {
 # DocType Class
 # ---------------
 # Override standard doctype classes
-override_doctype_class = {
-	# "Opportunity": "green.green.custom.opportunity.CustomOpportunity",
-	"Lead": "green.green.custom.lead.CustomLead",
-}
+# override_doctype_class = {
+# 	# "Opportunity": "green.green.custom.opportunity.CustomOpportunity",
+# 	# "Lead": "green.green.custom.lead.CustomLead",
+# }
 
 # Document Events
 # ---------------
 # Hook on document methods and events
 
-doc_events = {
-    "Event":{
-        "validate":"green.green.custom.event.validate",
+# doc_events = {
+#     "Event":{
+#         "validate":"green.green.custom.event.validate",
                         
-    }
-}
+#     }
+# }
 
 # Scheduled Tasks
 # ---------------
