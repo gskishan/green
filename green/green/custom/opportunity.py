@@ -27,3 +27,14 @@ def custom_link_open_events(ref_doctype, ref_docname, doc):
 		event_doc.add_participant(doc.doctype, doc.name)
 		event_doc.save()
 
+def get_permission_query_conditions(user=None):
+    if not user:
+        user = frappe.session.user
+    return f"""
+    (
+        `tabEvent`.`event_type` IN ('Public', 'Private')
+        OR `tabEvent`.`owner`={frappe.db.escape(user)}
+    )
+    """
+
+
