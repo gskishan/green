@@ -37,4 +37,12 @@ def get_permission_query_conditions(user=None):
     )
     """
 
+def has_permission(doc, user):
+	typelist=["Public","Private"]
+	if doc.event_type == "Public" or doc.owner == user:
+		return True
+
+	return False
+
+
 
