@@ -5,5 +5,6 @@ import frappe
 
 @frappe.whitelist()
 def validate(self,method=None):
-    self.event_type="Public"
-    frappe.errprint([self.event_type,self.owner])
+    pass
+    # self.event_type="Public"
+    # frappe.errprint([self.event_type,self.owner])
