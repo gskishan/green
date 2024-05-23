@@ -105,6 +105,9 @@ doctype_js = {
 # Permissions
 # -----------
 # Permissions evaluated in scripted ways
+permission_query_conditions = {
+	"Event": "green.green.custom.opportunity.get_permission_query_conditions",
+}
 
 # permission_query_conditions = {
 #	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
