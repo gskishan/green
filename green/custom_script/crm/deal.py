@@ -36,6 +36,6 @@ def create_quotation(doctype, name):
         return {"success" : True,
         'Mesage': "Created Succesfully"}
 
-    except:
-        return {"success": False}
+    except Exception as err:
+        return {"success": False, "err":err}
 
