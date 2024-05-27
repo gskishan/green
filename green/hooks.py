@@ -242,5 +242,6 @@ fixtures=[
         "filters": {
             "module": ["in", ["Green"]]
         }
-    }
+    },
+    "CRM Form Script",
 ]
