@@ -30,7 +30,7 @@ def create_quotation(doctype, name):
         quotation.contact_person = contact_person
         quotation.insert()
         # Update Deal Status
-        deal.status = "Quotation Created"
+        # deal.status = "Quotation Created"
         deal.save()
         # Return Succes Message
         return {"success" : True,
