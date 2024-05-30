@@ -1,0 +1,36 @@
+{
+ "custom_fields": [],
+ "custom_perms": [],
+ "doctype": "Sales Team",
+ "links": [],
+ "property_setters": [
+  {
+   "_assign": null,
+   "_comments": null,
+   "_liked_by": null,
+   "_user_tags": null,
+   "creation": "2024-04-14 09:52:03.199395",
+   "default_value": null,
+   "doc_type": "Sales Team",
+   "docstatus": 0,
+   "doctype_or_field": "DocField",
+   "field_name": "sales_person",
+   "group_owner": null,
+   "idx": 0,
+   "is_system_generated": 0,
+   "modified": "2024-05-29 10:30:40.902762",
+   "modified_by": "Administrator",
+   "module": null,
+   "name": "Sales Team-sales_person-mandatory_depends_on",
+   "owner": "kishan@gtksoft.in",
+   "parent": null,
+   "parentfield": null,
+   "parenttype": null,
+   "property": "mandatory_depends_on",
+   "property_type": "Data",
+   "row_name": null,
+   "value": "eval.doc.company==\"Greentek India Limited\""
+  }
+ ],
+ "sync_on_migrate": 1
+}
