@@ -22,4 +22,5 @@ def set_name(doc):
 
     sequence_formatted = '{:05d}'.format(sequence)
 
-    doc.name = "{0}/{1}/{2}/{3}/{4}".format(doc_prefix, month, "", year, sequence_formatted)
+    doc.name = "{0}/{1}/{2}/{3}".format(doc_prefix, month, year, sequence_formatted)
+    frappe.errprint(doc.name )
