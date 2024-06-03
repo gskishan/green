@@ -3,21 +3,23 @@ import frappe
 
 
 def validate(self, method=None):
-    if self.is_new():
-        try:
-            sql = """SELECT MAX(custom_sequence) sequence
-                    FROM `tabSales Invoice`
-                    WHERE company=%s AND custom_sequence IS NOT NULL and  YEAR(creation) =%s
-                    ORDER BY creation DESC
-                    LIMIT 1""".format(self.doctype)
-            last_count = frappe.db.sql(sql, (self.company,get_year(self.posting_date)), as_dict=False)
-            last_count = last_count[0][0] if last_count else None
-            if last_count is not None:
-                self.custom_sequence = last_count + 1
-            else:
-                self.custom_sequence = 1	
-        except Exception as e:
-            frappe.log_error(f"Error setting  custom_sequence: {str(e)}")
+    doc_list=["Purchase Order","Sales Order","Purchase Invoice","Sales Invoice","Journal Entry","Payment Entry","Stock Entry"]
+    if self.doctype in doc_list:
+        if self.is_new():
+            try:
+                sql = """SELECT MAX(custom_sequence) sequence
+                        FROM `tabSales Invoice`
+                        WHERE company=%s AND custom_sequence IS NOT NULL and  YEAR(creation) =%s
+                        ORDER BY creation DESC
+                        LIMIT 1""".format(self.doctype)
+                last_count = frappe.db.sql(sql, (self.company,get_year(self.posting_date)), as_dict=False)
+                last_count = last_count[0][0] if last_count else None
+                if last_count is not None:
+                    self.custom_sequence = last_count + 1
+                else:
+                    self.custom_sequence = 1	
+            except Exception as e:
+                frappe.log_error(f"Error setting  custom_sequence: {str(e)}")
 
 
 def get_year(posting_date):
