@@ -1,6 +1,34 @@
 import re
 import frappe
 
+
+def validate(self, method=None):
+    if self.is_new():
+        try:
+            sql = """SELECT MAX(sequence) sequence
+                    FROM `tabSales Invoice`
+                    WHERE company=%s AND sequence IS NOT NULL and  YEAR(creation) =%s
+                    ORDER BY creation DESC
+                    LIMIT 1""".format(self.doctype)
+            last_count = frappe.db.sql(sql, (self.company,get_year(self.posting_date)), as_dict=False)
+            last_count = last_count[0][0] if last_count else None
+            if last_count is not None:
+                self.sequence = last_count + 1
+            else:
+                self.sequence = 1	
+        except Exception as e:
+            frappe.log_error(f"Error setting  sequence: {str(e)}")
+
+
+def get_year(posting_date):
+    import datetime
+    date_string = str(posting_date)
+    date_object = datetime.datetime.strptime(date_string, '%Y-%m-%d')
+    year = date_object.year
+    return year
+
+
+
 def autoname(doc, method=None):
     set_name(doc)
 
@@ -52,9 +80,17 @@ def set_name(doc):
             if doc.stock_entry_type=='Material Receipt':
                 doc_prefix="MR"
 
-        sql = """SELECT COUNT(name) AS seq FROM `tab{0}` WHERE YEAR({1}) = %s AND company = %s;""".format(doc.doctype, posting_dt)
-        ct = frappe.db.sql(sql, (p_year, doc.company), as_dict=True)
-        sequence = ct[0].seq + 1 if ct and ct[0].seq is not None else 1
-        
+        sql = """SELECT MAX(sequence)
+                            FROM `tab{0}`
+                            WHERE company=%s AND sequence IS NOT NULL""".format(doc.doctype)
+        max_icv = frappe.db.sql(sql, (doc.company,), as_dict=False)[0][0]
+        if max_icv is not None:
+            sequence = max_icv + 1
+        else:
+            sequence = 1
+        last_number='{:05d}'.format(sequence)
+    
+        if last_number == 0:
+            last_number = '{:05d}'.format(sequence)
         sequence_formatted = '{:05d}'.format(sequence)
         doc.name = "{0}/{1}/{2}/{3}".format(doc_prefix, month, p_year[-2:], sequence_formatted)
