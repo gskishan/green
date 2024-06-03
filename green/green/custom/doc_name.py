@@ -14,7 +14,41 @@ def set_name(doc):
     if doc.doctype == "Sales Invoice":
         posting_dt = "posting_date"
         p_year = str(doc.posting_date).split("-")[0]
-        doc_prefix="SI"
+        if doc.is_return:
+            doc_prefix="SRET"
+        else:
+            doc_prefix="SI"
+    if doc.doctype == "Payment Entry":
+        posting_dt = "posting_date"
+        p_year = str(doc.posting_date).split("-")[0]
+        doc_prefix="PI"      
+     if doc.doctype == "Sales Order":
+        posting_dt = "posting_date"
+        p_year = str(doc.posting_date).split("-")[0]
+        doc_prefix="SO"
+    if doc.doctype == "Purchase Invoice":
+        posting_dt = "posting_date"
+        p_year = str(doc.posting_date).split("-")[0]
+        doc_prefix="PI"
+    if doc.doctype == "Journal Entry":
+        posting_dt = "posting_date"
+        p_year = str(doc.posting_date).split("-")[0]
+        doc_prefix="JV"
+    if doc.doctype == "Purchase Order":
+        posting_dt = "transaction_date"
+        p_year = str(doc.transaction_date).split("-")[0]
+        doc_prefix="PO"
+    if doc.doctype == "Stock Entry":
+        posting_dt = "posting_date"
+        p_year = str(doc.posting_date).split("-")[0]
+        if doc.stock_entry_type=='Material Transfer to Customer':
+            doc_prefix="PJDC"
+        if doc.stock_entry_type=='Material Issue':
+            doc_prefix="MI"  
+        if doc.stock_entry_type=='Manufacture':
+            doc_prefix="STE"
+         if doc.stock_entry_type=='Material Receipt':
+            doc_prefix="MR"
 
     sql = """SELECT COUNT(name) AS seq FROM `tab{0}` WHERE YEAR({1}) = %s AND company = %s;""".format(doc.doctype, posting_dt)
     ct = frappe.db.sql(sql, (p_year, doc.company), as_dict=True)
