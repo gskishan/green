@@ -133,12 +133,12 @@ has_permission = {
 # ---------------
 # Hook on document methods and events
 
-doc_events = {
-    "*":{
-        "autoname":"green.green.custom.doc_name.autoname",
+# doc_events = {
+#     "*":{
+#         "autoname":"green.green.custom.doc_name.autoname",
                         
-    }
-}
+#     }
+# }
 
 # Scheduled Tasks
 # ---------------
