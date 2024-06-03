@@ -133,12 +133,12 @@ has_permission = {
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-#     "Event":{
-#         "validate":"green.green.custom.event.validate",
+doc_events = {
+    "Sales Invoice":{
+        "autoname":"green.green.custom.doc_name.autoname",
                         
-#     }
-# }
+    }
+}
 
 # Scheduled Tasks
 # ---------------
