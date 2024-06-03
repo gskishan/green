@@ -21,5 +21,5 @@ def set_name(doc):
     sequence = ct[0].seq + 1 if ct and ct[0].seq is not None else 1
     
     sequence_formatted = '{:05d}'.format(sequence)
-    doc.name = "{0}/{1}/{2}/{3}".format(doc_prefix, month, year, sequence_formatted)
+    doc.name = "{0}/{1}/{2}/{3}".format(doc_prefix, month, p_year[-2:], sequence_formatted)
     frappe.errprint(doc.name )
