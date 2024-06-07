@@ -4,6 +4,13 @@
 import frappe
 from frappe import _
 
+import frappe
+from frappe.utils import money_in_words
+
+@frappe.whitelist()
+def get_money_in_words(amount, currency):
+    return money_in_words(amount, currency)
+
 def execute(filters=None):
 	# columns, data = [], []
 	data=get_data(filters)
