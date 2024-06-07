@@ -87,7 +87,7 @@
                 <td> {%= format_currency(total_net,filters.currency  || "INR") %}</td>
             </tr>
 <tr>
- <td colspan="100" id="money-in-words">Amount in Words: {%= convertMoneyToWords(total_gross, filters.currency  || "INR") %} </td>
+ <td colspan="100" id="money-in-words">Amount in Words: {%= moneyInWords(total_net) %} </td>
 
  
 
