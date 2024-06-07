@@ -23,13 +23,13 @@ def get_data(filters):
 
 def get_columns():
 	columns = [
-		{"label": _("Employee ID"), "fieldname": "employee", "fieldtype": "Link","options":"Employee", "width": 180},
-		{"label": _("Employee Name"), "fieldname": "employee_name", "fieldtype": "Data" ,"width": 180},
-		{"label": _("IFSC Code"), "fieldname": "custom_ifsc_code", "fieldtype": "Data", "width": 140},
-		{"label": _("Bank Name"), "fieldname": "bank_name", "fieldtype": "Float", "width": 120},
-		{"label": _("Bank Account"), "fieldname": "bank_account_no",  "fieldtype": "Data","width": 120},
-		{"label": _("Net Pay"), "fieldname": "net_pay", "fieldtype": "Float", "width": 120},
-		{"label": _("Gross Pay"), "fieldname": "gross_pay", "fieldtype": "Data", "width": 140},
+		{"label": _("Employee ID"), "fieldname": "employee", "fieldtype": "Link","options":"Employee", "width": 160},
+		{"label": _("Employee Name"), "fieldname": "employee_name", "fieldtype": "Data" ,"width": 200},
+		{"label": _("Bank Name"), "fieldname": "bank_name", "fieldtype": "Data", "width": 200},
+		{"label": _("Bank Account"), "fieldname": "bank_account_no",  "fieldtype": "Data","width": 200},
+		{"label": _("IFSC Code"), "fieldname": "custom_ifsc_code", "fieldtype": "Data", "width": 120},
+		{"label": _("Gross Pay"), "fieldname": "gross_pay", "fieldtype": "Float", "width": 80},
+		{"label": _("Net Pay"), "fieldname": "net_pay", "fieldtype": "Float", "width": 80},
 
 		
 	]
