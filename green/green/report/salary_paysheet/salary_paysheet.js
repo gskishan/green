@@ -49,4 +49,32 @@ function get_month_end(date) {
     var d = new Date(date);
     return new Date(d.getFullYear(), d.getMonth() + 1, 0);
 }
+function getTodayDate() {
+    var d = new Date();
+    var f = n => ('0' + n).slice(-2);
+    return f(d.getDate()) + '-' + f(d.getMonth() + 1) + '-' + d.getFullYear();
+}
+function formatDate(inputDate) {
+    var d = new Date(inputDate);
+    var f = n => ('0' + n).slice(-2);
+    return f(d.getDate()) + '.' + f(d.getMonth() + 1) + '.' + d.getFullYear();
+}
 
+function convertMoneyToWords(amt, cur) {
+    frappe.call({
+        method: 'green.green.report.salary_paysheet.salary_paysheet.get_money_in_words',
+        args: {
+            amount: amt,
+            currency: cur
+        },
+        callback: function(response) {
+            if (response.message) {
+                console.log("Money in words: ", response.message);
+				document.getElementById("money-in-words").innerText = response.message
+
+			return response.message
+            }
+			
+        }
+    });
+}
