@@ -39,7 +39,7 @@ def get_cond(filters):
 	if filters.get("company"):
 		cond=cond+' where company="{0}" '.format(filters.get("company"))
 	if filters.get("from_date"):
-		cond=conditicondons+' and start_date="{0}" '.format(filters.get("from_date"))
+		cond=cond+' and start_date="{0}" '.format(filters.get("from_date"))
 	if filters.get("to_date"):
-		cond=conditicondons+' and end_date="{0}" '.format(filters.get("to_date"))
+		cond=cond+' and end_date="{0}" '.format(filters.get("to_date"))
 	return cond
