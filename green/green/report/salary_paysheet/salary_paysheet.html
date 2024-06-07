@@ -1,1 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Advice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .content {
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        .total-row {
+            font-weight: bold;
+        }
+        .amount-words {
+            margin-top: 20px;
+        }
+        .signature {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <p><strong>To,<br>The Branch Manager<br>AXIS BANK<br>Marredpally, Secunderabad- 500026</strong></p>
+            <p><strong>Dated: 16-05-2024</strong></p>
+        </div>
+        <div class="content">
+            <p>Dear Sir,</p>
+            <p><strong>Sub: Payment Advice from Akoni Technologies<br>A/C # 920030058398719 for period 01.04.2024 to 30.04.2024<br>Ple+A16:G56ke the payroll transfer from above account number to the below mentioned Account numbers towards Employee Salaries Cheque No: 732472 Dated : 16-05-2024</strong></p>
+        </div>
+        <table>
+            <tr>
+                <th>S.No</th>
+                <th>Employee ID</th>
+                <th>Employee Name</th>
+                <th>BANK NAME</th>
+                <th>ACCOUNT NO</th>
+                <th>IFSC CODE</th>
+                <th>Gross PAY</th>
+                <th>NET PAY</th>
+            </tr>
+            {% total_net=0 %}  
+            {% total_gross=0 %}  
+
+            {% for(var j= 0; j < data.length; j++) { %}
+            <tr>
+                <td>{%= j+1 %}</td>
+                <td>{%= data[j]["employee"] %}</td>
+                <td>{%= data[j]["employee_name"] %}</td>
+                <td>{%= data[j]["bank_name"] %}</td>
+                <td>{%= data[j]["bank_account_no"] %}</td>
+                <td>{%= data[j]["custom_ifsc_code"] %}</td>
+               
+                <td> {%= format_currency(data[j]["gross_pay"],filters.currency  || "INR") %} </td>
+                <td> {%= format_currency(data[j]["net_pay"],filters.currency  || "INR") %}</td>
+                {% total_net +=data[j]["net_pay"] %} 
+                {% total_gross +=data[j]["gross_pay"] %} 
+            </tr>
+            {% } %} 
+            <tr class="total-row">
+                <td colspan="6">Total</td>
+                <td> {%= format_currency(total_gross, filters.currency  || "INR") %}</td>
+                <td> {%= format_currency(total_net,filters.currency  || "INR") %}</td>
+            </tr>
+<tr>
+ <td colspan="100">Amount in Words: Sixty Three Thousand One Hundred and Eighty Six Only</td>
+
+</tr>
+        </table>
+
+               <div class="signature">
+            <p>For Akoni Technologies</p>
+            <p>Authorised Signature</p>
+        </div>
+    </div>
+</body>
+</html>
+
 
