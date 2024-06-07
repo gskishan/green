@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
         }
         .container {
-            width: 80%;
+            width: 90%;
             margin: auto;
         }
         .header {
@@ -45,22 +45,23 @@
     <div class="container">
         <div class="header">
             <p><strong>To,<br>The Branch Manager<br>AXIS BANK<br>Marredpally, Secunderabad- 500026</strong></p>
-            <p><strong>Dated: 16-05-2024</strong></p>
+            <p><strong>Dated: {%= getTodayDate() %}</strong></p>
         </div>
         <div class="content">
             <p>Dear Sir,</p>
-            <p><strong>Sub: Payment Advice from Akoni Technologies<br>A/C # 920030058398719 for period 01.04.2024 to 30.04.2024<br>Ple+A16:G56ke the payroll transfer from above account number to the below mentioned Account numbers towards Employee Salaries Cheque No: 732472 Dated : 16-05-2024</strong></p>
+            <p><strong>Sub: Payment Advice from {%= filters.company %}<br>A/C # 920030058398719 for
+                 period {%= formatDate(filters.from_date) %} to {%= formatDate(filters.to_date) %}<br>Ple+A16:G56ke the payroll transfer from above account number to the below mentioned Account numbers towards Employee Salaries Cheque No: 732472 Dated : {%= getTodayDate() %}</strong></p>
         </div>
         <table>
             <tr>
-                <th>S.No</th>
-                <th>Employee ID</th>
-                <th>Employee Name</th>
-                <th>BANK NAME</th>
-                <th>ACCOUNT NO</th>
-                <th>IFSC CODE</th>
-                <th>Gross PAY</th>
-                <th>NET PAY</th>
+                <th style="background-color: transparent !important;">S.No</th>
+                <th style="background-color: transparent !important;">Employee ID</th>
+                <th style="background-color: transparent !important;">Employee Name</th>
+                <th style="background-color: transparent !important;">BANK NAME</th>
+                <th style="background-color: transparent !important;">ACCOUNT NO</th>
+                <th style="background-color: transparent !important;">IFSC CODE</th>
+                <th style="width: 120px;background-color: transparent !important;">Gross PAY</th>
+                <th style="width: 120px;background-color: transparent !important;">NET PAY</th>
             </tr>
             {% total_net=0 %}  
             {% total_gross=0 %}  
@@ -86,17 +87,20 @@
                 <td> {%= format_currency(total_net,filters.currency  || "INR") %}</td>
             </tr>
 <tr>
- <td colspan="100">Amount in Words: Sixty Three Thousand One Hundred and Eighty Six Only</td>
+ <td colspan="100" id="money-in-words">Amount in Words: {%= convertMoneyToWords(total_gross, filters.currency  || "INR") %} </td>
+
+ 
+
 
 </tr>
+
         </table>
 
                <div class="signature">
-            <p>For Akoni Technologies</p>
+            <p>For {%= filters.company %}</p>
             <p>Authorised Signature</p>
         </div>
     </div>
 </body>
 </html>
-
 
