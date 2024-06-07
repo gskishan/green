@@ -13,6 +13,14 @@ frappe.query_reports["Salary Paysheet"] = {
 			"default": frappe.defaults.get_default("company")
 		},
 		{
+			"fieldname": "currency",
+			"label": __("Currency"),
+			"fieldtype": "Link",
+			"options": "Currency",
+			"reqd": 1,
+			"default": "INR"
+		},
+		{
 			"fieldname": "from_date",
 			"label": __("From Date"),
 			"fieldtype": "Date",
@@ -21,7 +29,7 @@ frappe.query_reports["Salary Paysheet"] = {
 			on_change: function() {
 				if (frappe.query_report.filters[1].value ){
 
-					frappe.query_report.set_filter_value('to_date', get_month_end(frappe.query_report.filters[1].value ));
+					frappe.query_report.set_filter_value('to_date', get_month_end(frappe.query_report.filters[2].value ));
 				}
 			}
 		},
