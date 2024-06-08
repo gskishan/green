@@ -45,6 +45,15 @@ frappe.query_reports["Salary Paysheet"] = {
 
 	]
 };
+function getAccountNo(company) {
+    const accountNumbers = {
+        "AKONI TECHNOLOGIES": "920030058398719",
+        "Greentek India Limited": "917030022506397",
+        "GTK Software Solutions LLP": "923020047728020"
+    };
+
+    return accountNumbers[company] || null;
+}
 function get_month_end(date) {
     var d = new Date(date);
     return new Date(d.getFullYear(), d.getMonth() + 1, 0);
