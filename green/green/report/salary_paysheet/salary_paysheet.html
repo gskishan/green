@@ -13,7 +13,7 @@
             margin: auto;
         }
         .header {
-            text-align: center;
+            /* text-align: center; */
             margin-bottom: 20px;
         }
         .content {
@@ -39,18 +39,31 @@
         .signature {
             margin-top: 40px;
         }
+        .signature-container {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .signature-line {
+            border-bottom: 2px solid black;
+            width: 60%;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+
         <div class="header">
-            <p><strong>To,<br>The Branch Manager<br>AXIS BANK<br>Marredpally, Secunderabad- 500026</strong></p>
-            <p><strong>Dated: {%= getTodayDate() %}</strong></p>
+            <p><strong>To,<br>The Branch Manager<br>AXIS BANK</p>
+                <p><strong>Dated: {%= getTodayDate() %}</strong></p>
+            <p style="margin: 0;"> Marredpally, Secunderabad- 500026</strong></p>
+           
         </div>
         <div class="content">
-            <p>Dear Sir,</p>
-            <p><strong>Sub: Payment Advice from {%= filters.company %}<br>A/C # 920030058398719 for
-                 period {%= formatDate(filters.from_date) %} to {%= formatDate(filters.to_date) %}<br>Ple+A16:G56ke the payroll transfer from above account number to the below mentioned Account numbers towards Employee Salaries Cheque No: 732472 Dated : {%= getTodayDate() %}</strong></p>
+            <p>Dear Sir,</p> <br>
+            <p style="line-height: 1.3;margin-bottom: 5px;"><strong>Sub: Payment Advice from  {%= filters.company %}
+                <br>A/C # {%= getAccountNo(filters.company) %} for period  {%= formatDate(filters.from_date) %} to {%= formatDate(filters.to_date) %}<br>Ple+A16:G56ke the payroll transfer from above account number to the below mentioned Account numbers towards Employee </strong></p>
+            <center style="margin: 0;"><strong> Salaries Cheque No: ___________________ Dated :  {%= getTodayDate() %}</strong></center>
         </div>
         <table>
             <tr>
@@ -96,9 +109,12 @@
 
         </table>
 
-               <div class="signature">
-            <p>For {%= filters.company %}</p>
-            <p>Authorised Signature</p>
+              
+        <div class="signature-container">
+            <p> <strong>For {%= filters.company %}</strong></p>
+            <br><br>
+            <span>Authorised Signature</span>
+            <div class="signature-line"></div>
         </div>
     </div>
 </body>
