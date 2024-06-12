@@ -22,7 +22,7 @@ def execute(filters=None):
 
 def get_data(filters):
 	cond=get_cond(filters)
-	sql=""" select employee,employee_name,custom_ifsc_code,bank_name,bank_account_no,net_pay,gross_pay from `tabSalary Slip` {0} """.format(cond)
+	sql=""" select employee,employee_name,custom_ifsc_code,bank_name,bank_account_no,net_pay from `tabSalary Slip` {0} """.format(cond)
 	frappe.errprint(sql)
 	return frappe.db.sql(sql,as_dict=1)
 
