@@ -73,7 +73,7 @@
                 <th style="background-color: transparent !important;">BANK NAME</th>
                 <th style="background-color: transparent !important;">ACCOUNT NO</th>
                 <th style="background-color: transparent !important;">IFSC CODE</th>
-                <th style="width: 120px;background-color: transparent !important;">Gross PAY</th>
+<!--                 <th style="width: 120px;background-color: transparent !important;">Gross PAY</th> -->
                 <th style="width: 120px;background-color: transparent !important;">NET PAY</th>
             </tr>
             {% total_net=0 %}  
@@ -88,7 +88,7 @@
                 <td>{%= data[j]["bank_account_no"] %}</td>
                 <td>{%= data[j]["custom_ifsc_code"] %}</td>
                
-                <td> {%= format_currency(data[j]["gross_pay"],filters.currency  || "INR") %} </td>
+<!--                 <td> {%= format_currency(data[j]["gross_pay"],filters.currency  || "INR") %} </td> -->
                 <td> {%= format_currency(data[j]["net_pay"],filters.currency  || "INR") %}</td>
                 {% total_net +=data[j]["net_pay"] %} 
                 {% total_gross +=data[j]["gross_pay"] %} 
