@@ -1,0 +1,104 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{Designing}-{#####}",
+ "creation": "2024-05-06 13:06:43.672003",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "designer",
+  "designer_name",
+  "design",
+  "amended_from",
+  "column_break_w4htu",
+  "site_survey",
+  "opportunity_name",
+  "designing_status",
+  "comments"
+ ],
+ "fields": [
+  {
+   "fetch_from": "designer.employee_name",
+   "fieldname": "designer_name",
+   "fieldtype": "Data",
+   "label": "Designer Name"
+  },
+  {
+   "fieldname": "design",
+   "fieldtype": "Table",
+   "label": "Design",
+   "options": "Design"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Designing",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_w4htu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "site_survey",
+   "fieldtype": "Link",
+   "label": "Site Survey",
+   "options": "Site Survey"
+  },
+  {
+   "fieldname": "opportunity_name",
+   "fieldtype": "Link",
+   "label": "Opportunity Name",
+   "options": "Opportunity"
+  },
+  {
+   "fieldname": "designer",
+   "fieldtype": "Link",
+   "label": "Designer",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "designing_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Designing Status",
+   "options": "\nOpen\nCompleted"
+  },
+  {
+   "fieldname": "comments",
+   "fieldtype": "Small Text",
+   "label": "Comments"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-05-07 12:02:31.476228",
+ "modified_by": "Administrator",
+ "module": "Green",
+ "name": "Designing",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

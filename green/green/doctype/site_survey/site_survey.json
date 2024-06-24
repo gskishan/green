@@ -1,0 +1,212 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{Site Survey}-{#####}",
+ "creation": "2024-05-07 16:06:16.899916",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_zdcf",
+  "amended_from",
+  "custom_self",
+  "custom_site_visitor",
+  "customer_name",
+  "customer_number",
+  "poc_name",
+  "poc_contact",
+  "site_location",
+  "custom_google_map_location",
+  "column_break_mpxf",
+  "opportunity_name",
+  "site_survey_status",
+  "custom_project",
+  "opportunity_owner",
+  "sales_person",
+  "department",
+  "site_engineer",
+  "site_engineer_name",
+  "section_break_pxjm",
+  "hand_sketch",
+  "column_break_hgpx",
+  "site_photos",
+  "column_break_svex",
+  "site_survey_report"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_zdcf",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Site Survey",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "customer_number",
+   "fieldtype": "Data",
+   "label": "Customer number"
+  },
+  {
+   "fieldname": "poc_name",
+   "fieldtype": "Data",
+   "label": "POC Name"
+  },
+  {
+   "fieldname": "poc_contact",
+   "fieldtype": "Data",
+   "label": "POC Contact"
+  },
+  {
+   "fieldname": "site_location",
+   "fieldtype": "Small Text",
+   "label": "Site Location"
+  },
+  {
+   "fieldname": "column_break_mpxf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "opportunity_name",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "label": "Opportunity Name",
+   "options": "Opportunity"
+  },
+  {
+   "fieldname": "site_survey_status",
+   "fieldtype": "Select",
+   "label": "Site Survey Status",
+   "options": "\nSite Survey Assigned\nSite Survey Completed"
+  },
+  {
+   "fieldname": "opportunity_owner",
+   "fieldtype": "Data",
+   "label": "Opportunity Owner"
+  },
+  {
+   "fieldname": "sales_person",
+   "fieldtype": "Link",
+   "label": "Sales Person",
+   "options": "Sales Person"
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "site_engineer",
+   "fieldtype": "Link",
+   "label": "Site Engineer",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "site_engineer.employee_name",
+   "fieldname": "site_engineer_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Site Engineer Name"
+  },
+  {
+   "default": "0",
+   "fieldname": "custom_self",
+   "fieldtype": "Check",
+   "label": "Self"
+  },
+  {
+   "fieldname": "section_break_pxjm",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "hand_sketch",
+   "fieldtype": "Table",
+   "label": "Hand Sketch",
+   "options": "Attachment Table"
+  },
+  {
+   "fieldname": "site_photos",
+   "fieldtype": "Table",
+   "label": "Site Photos",
+   "options": "Site Photos"
+  },
+  {
+   "fieldname": "column_break_hgpx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "site_survey_report",
+   "fieldtype": "Table",
+   "label": "Site Survey Report",
+   "options": "Site Survey Report"
+  },
+  {
+   "fieldname": "column_break_svex",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "custom_site_visitor",
+   "fieldtype": "Link",
+   "label": "Site Visitor",
+   "options": "User"
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Customer",
+   "translatable": 1
+  },
+  {
+   "fieldname": "custom_google_map_location",
+   "fieldtype": "Attach",
+   "label": "Google Map Location"
+  },
+  {
+   "fieldname": "custom_project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "group": "Designing",
+   "link_doctype": "Designing",
+   "link_fieldname": "site_survey"
+  }
+ ],
+ "modified": "2024-05-07 16:45:48.040269",
+ "modified_by": "Administrator",
+ "module": "Green",
+ "name": "Site Survey",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

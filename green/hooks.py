@@ -40,6 +40,9 @@ doctype_js = {
     "Employee Checkin":"public/js/employee_checkin.js",
     "Expense Claim": "public/js/expense_claim.js",
     "Payment Entry": "public/js/payment_entry.js",
+    "Lead": "public/js/lead.js",
+    "Opportunity": "public/js/opportunity.js",
+    "Quotation": "public/js/quotation.js",
     "CRM Deal" :"public/js/crm_deal.js"
 }
 
@@ -106,13 +109,6 @@ doctype_js = {
 # Permissions
 # -----------
 # Permissions evaluated in scripted ways
-permission_query_conditions = {
-	"Event": "green.green.custom.opportunity.get_permission_query_conditions",
-}
-
-has_permission = {
-	"Event": "green.green.custom.opportunity.has_permission",
-}
 # permission_query_conditions = {
 #	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
 # }
@@ -124,21 +120,25 @@ has_permission = {
 # DocType Class
 # ---------------
 # Override standard doctype classes
-# override_doctype_class = {
-# 	# "Opportunity": "green.green.custom.opportunity.CustomOpportunity",
-# 	# "Lead": "green.green.custom.lead.CustomLead",
-# }
+
+override_doctype_class = {
+	# "ToDo": "custom_app.overrides.CustomToDo"
+	"Project": "green.custom_script.project.CustomProject"
+}
 
 # Document Events
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-#     "Event":{
-#         "validate":"green.green.custom.event.validate",
+doc_events = {
+    # "Stock Entry":{
+    #     "validate":"green.green.custom.stock_entry.validate",
                         
-#     }
-# }
+    # }
+    "Sales Order":{
+        "after_insert":"green.green.custom.sales_order.create_project_automatically",
+    }
+}
 
 # Scheduled Tasks
 # ---------------
