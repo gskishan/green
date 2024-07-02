@@ -124,10 +124,11 @@ has_permission = {
 # DocType Class
 # ---------------
 # Override standard doctype classes
-# override_doctype_class = {
-# 	# "Opportunity": "green.green.custom.opportunity.CustomOpportunity",
-# 	# "Lead": "green.green.custom.lead.CustomLead",
-# }
+override_doctype_class = {
+	# "Opportunity": "green.green.custom.opportunity.CustomOpportunity",
+	# "Lead": "green.green.custom.lead.CustomLead",
+    "Sales Order": "green.green.override.sales_order.CustomSalesOrder"
+}
 
 # Document Events
 # ---------------
