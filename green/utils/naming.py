@@ -34,9 +34,13 @@ def set_naming_counter(self):
 
         Series = frappe.qb.DocType("Series")
         prefix = name
+        prev_count += 1
         last_no = "0"* (5 - len(str(prev_count))) + str(prev_count)
 
-        if count == 0:
+        if count == 1 or count == 0:
             # Initialize if not present in DB
-            frappe.qb.into(Series).insert(prefix, prev_count).columns("name", "current").run()
+            if frappe.db.get_value("Series", prefix, "name", order_by="name") is None:
+                frappe.qb.into(Series).insert(prefix, new_count).columns("name", "current").run()
+            else:
+                (frappe.qb.update(Series).set(Series.current, cint(prev_count)).where(Series.name == prefix)).run()
             self.name = prefix + last_no
