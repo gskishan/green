@@ -124,10 +124,21 @@ has_permission = {
 # DocType Class
 # ---------------
 # Override standard doctype classes
-# override_doctype_class = {
-# 	# "Opportunity": "green.green.custom.opportunity.CustomOpportunity",
-# 	# "Lead": "green.green.custom.lead.CustomLead",
-# }
+override_doctype_class = {
+	# "Opportunity": "green.green.custom.opportunity.CustomOpportunity",
+	# "Lead": "green.green.custom.lead.CustomLead",
+    "Sales Order": "green.green.override.sales_order.CustomSalesOrder",
+    "Quotation": "green.green.override.quotation.CustomQuotation",
+    "Sales Invoice": "green.green.override.sales_invoice.CustomSalesInvoice",
+    "Purchase Invoice": "green.green.override.purchase_invoice.CustomPurchaseInvoice",
+    "Purchase Receipt": "green.green.override.purchase_receipt.CustomPurchaseReceipt",
+    "Delivery Note": "green.green.override.delivery_note.CustomDeliveryNote",
+    "Payment Entry": "green.green.override.payment_entry.CustomPaymentEntry",
+    "Journal Entry": "green.green.override.journal_entry.CustomJournalEntry",
+    "Purchase Order": "green.green.override.purchase_order.CustomPurchaseOrder",
+    "Stock Entry": "green.green.override.stock_entry.CustomStockEntry",
+    "Expense Claim": "green.green.override.expense_claim.CustomExpenseClaim"
+}
 
 # Document Events
 # ---------------
