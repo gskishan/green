@@ -136,7 +136,8 @@ override_doctype_class = {
     "Payment Entry": "green.green.override.payment_entry.CustomPaymentEntry",
     "Journal Entry": "green.green.override.journal_entry.CustomJournalEntry",
     "Purchase Order": "green.green.override.purchase_order.CustomPurchaseOrder",
-    "Stock Entry": "green.green.override.stock_entry.CustomStockEntry"
+    "Stock Entry": "green.green.override.stock_entry.CustomStockEntry",
+    "Expense Claim": "green.green.override.expense_claim.CustomExpenseClaim"
 }
 
 # Document Events
