@@ -5,14 +5,13 @@ class CustomPaymentReconciliation(PaymentReconciliation):
 	def get_nonreconciled_payment_entries(self):
 		self.check_mandatory_to_fetch()
 
-		payment_entries = self.get_payment_entries()
+		payment_entries = self.get_payment_entries() or []
 		journal_entries = self.get_jv_entries()
 
 		if self.party_type in ["Customer", "Supplier"]:
 			dr_or_cr_notes = self.get_dr_or_cr_notes()
 		else:
 			dr_or_cr_notes = []
-		frappe.errprint([payment_entries,journal_entries,dr_or_cr_notes,"meno"])
 
 		non_reconciled_payments = payment_entries + journal_entries + dr_or_cr_notes
 
