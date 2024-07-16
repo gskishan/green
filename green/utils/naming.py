@@ -16,6 +16,7 @@ def get_current_naming_value(prefix):
 
 
 def set_naming_counter(self):
+    if self.is_new():
         date = nowdate()
         # yyyy-mm-dd
         year = date[2:4]
