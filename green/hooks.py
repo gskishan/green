@@ -139,6 +139,7 @@ override_doctype_class = {
     "Purchase Order": "green.green.override.purchase_order.CustomPurchaseOrder",
     "Stock Entry": "green.green.override.stock_entry.CustomStockEntry",
     "Expense Claim": "green.green.override.expense_claim.CustomExpenseClaim",
+    "Salary Slip": "green.custom_script.salary_slip.CustomSalarySlip",
     "Payment Reconciliation":"green.custom_script.payment_reconciliation.payment_reconciliation.CustomPaymentReconciliation"
 }
 
