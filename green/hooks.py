@@ -38,7 +38,7 @@ doctype_js = {
     "ToDo" : "public/js/todo.js",
     "Quotation" : "public/js/quotation.js",
     "Stock Entry": "public/js/stock_entry.js",
-    "Employee Checkin":"public/js/employee_checkin.js",
+    # "Employee Checkin":"public/js/employee_checkin.js",
     "Expense Claim": "public/js/expense_claim.js",
     "Payment Entry": "public/js/payment_entry.js",
     "CRM Deal" :"public/js/crm_deal.js"
