@@ -157,23 +157,23 @@ override_doctype_class = {
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-#	"all": [
-#		"green.tasks.all"
-#	],
-#	"daily": [
-#		"green.tasks.daily"
-#	],
-#	"hourly": [
-#		"green.tasks.hourly"
-#	],
-#	"weekly": [
-#		"green.tasks.weekly"
-#	],
-#	"monthly": [
-#		"green.tasks.monthly"
-#	],
-# }
+scheduler_events = {
+	"all": [
+		"green.tasks.daily.make_missing_checkout",
+	],
+	# "daily_long": [
+	# 	"green.tasks.daily"
+	# ],
+	# "hourly": [
+	# 	"green.tasks.hourly"
+	# ],
+	# "weekly": [
+	# 	"green.tasks.weekly"
+	# ],
+	# "monthly": [
+	# 	"green.tasks.monthly"
+	# ],
+}
 
 # Testing
 # -------
