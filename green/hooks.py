@@ -158,9 +158,9 @@ override_doctype_class = {
 # ---------------
 
 scheduler_events = {
-	"all": [
-		"green.tasks.daily.make_missing_checkout",
-	],
+	# "all": [
+	# 	"green.tasks.daily.make_missing_checkout",
+	# ],
 	# "daily_long": [
 	# 	"green.tasks.daily"
 	# ],

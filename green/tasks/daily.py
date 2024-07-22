@@ -7,8 +7,13 @@ from frappe.utils import (
     now
 )
 import json
+frappe.utils.logger.set_log_level("DEBUG")
+logger = frappe.logger("daily", allow_site=True, file_count=500)
+
 
 def make_missing_checkout():
+    logger.info("accessed Make Missing Checkout ")
+
     # Get All Checkins
     checkins = frappe.db.get_list("Employee Checkin", filters={
         "time":  ['between', ['2024-07-15', '2024-07-15']],
@@ -42,4 +47,6 @@ def make_missing_checkout():
             log.log_type = "OUT"
             log.time = str(shift_types[0]['end_time'])
             log.insert()
+    logger.info("Completed Make Missing Checkout ")
+    
     # print(json.dumps(missing_checkouts, indent=1, sort_keys=True, default=str),' Checkout \n\n\n\n\n\n\n')
