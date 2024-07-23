@@ -19,6 +19,7 @@ def make_missing_checkout():
         "time":  ['between', ['2024-07-15', '2024-07-15']],
         # "time":  ['between', [get_datetime_str(add_days(now(),-1)), get_datetime_str(now())]],
     }, fields=['name', 'time', 'log_type', 'employee'])
+    
 
     # Get All Shifts
     shift_types = frappe.db.get_list("Shift Type", filters={}, fields=['name', 'end_time'])
@@ -26,6 +27,7 @@ def make_missing_checkout():
     # Finding Out Missing Checkouts
     missing_checkouts = {}
     for each_checkin in checkins:
+        logger.info(f"Each Checkin {each_checkin}")
         if each_checkin["employee"] in missing_checkouts:
             temp_logs = missing_checkouts[each_checkin["employee"]]["data"]
             temp_logs.append({"log_type": each_checkin["log_type"], "time": each_checkin["time"]})
@@ -41,6 +43,7 @@ def make_missing_checkout():
                 no_logout = False
 
         if no_logout:
+            logger.info(f"Create Checkout {each}")
             # Create Checkout
             log = frappe.new_doc("Employee Checkin")
             log.employee = each
