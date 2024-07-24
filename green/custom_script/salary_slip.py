@@ -4,6 +4,8 @@ from hrms.payroll.doctype.salary_slip.salary_slip import SalarySlip
 from hrms.payroll.doctype.salary_slip.salary_slip import *
 from frappe.utils import flt
 from hrms.hr.utils import  validate_active_employee
+from hrms.hr.report.monthly_attendance_sheet.monthly_attendance_sheet import get_entry_exits_summary
+import json
 
 class CustomSalarySlip(SalarySlip):
 
@@ -51,3 +53,9 @@ def get_base_amount(employee):
 	else:
 		frappe.msgprint("issue in finding salary assigment")
 		return 0
+
+
+
+@frappe.whitelist()
+def get_late_entries(employee, filters):
+	return get_entry_exits_summary(employee, frappe._dict(json.loads(filters)))

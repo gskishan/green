@@ -41,7 +41,8 @@ doctype_js = {
     # "Employee Checkin":"public/js/employee_checkin.js",
     "Expense Claim": "public/js/expense_claim.js",
     "Payment Entry": "public/js/payment_entry.js",
-    "CRM Deal" :"public/js/crm_deal.js"
+    "CRM Deal" :"public/js/crm_deal.js",
+    "Salary Slip" :"public/js/salary_slip.js",
 }
 
 # Home Pages
