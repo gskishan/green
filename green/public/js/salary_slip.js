@@ -11,6 +11,12 @@ frappe.ui.form.on("Salary Slip", {
 	payroll_frequency:function(frm){
 		set_values(frm)
 	},
+	refresh(frm){
+		if(frm.doc.payment_days && frm.doc.payment_days > 1 && frm.doc.custom_late_entry_days >= 3){
+			frm.set_value("payment_days", Number(frm.doc.payment_days - Math.floor(frm.doc.custom_late_entry_days / 3)))
+			frm.refresh_field("payment_days")
+		}
+	}
 })
 
 function set_values(frm){
@@ -31,9 +37,7 @@ function set_values(frm){
 				if(r.message){
 					if(r.message.total_late_entries >0){
 						frm.set_value("custom_late_entry_days", r.message.total_late_entries)
-						frm.set_value("payment_days", Number(frm.doc.payment_days - Math.floor(r.message.total_late_entries / 3)))
 						frm.refresh_field("custom_late_entry_days")
-						frm.refresh_field("payment_days")
 					}
 				}
 			})
