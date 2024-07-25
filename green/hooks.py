@@ -43,6 +43,7 @@ doctype_js = {
     "Payment Entry": "public/js/payment_entry.js",
     "CRM Deal" :"public/js/crm_deal.js",
     "Salary Slip" :"public/js/salary_slip.js",
+    "Lead": "public/js/lead.js"
 }
 
 # Home Pages
