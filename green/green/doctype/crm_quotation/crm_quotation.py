@@ -6,6 +6,7 @@ from frappe.model.document import Document
 
 
 class CRMQuotation(Document):
+	@frappe.whitelist()
 	def update_date(self):
 		for d in get_data():
 			if d.get('valid_till'):
