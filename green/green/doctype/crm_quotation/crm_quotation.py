@@ -12,7 +12,7 @@ class CRMQuotation(Document):
 			if d.get('valid_till'):
 				doc=frappe.get_doc("Quotation",d.get("quotation"))
 				if doc.docstatus==1:
-					doc.db_set("valid_till",d.get('valid_till'))
+					doc.db_set("valid_till",None)
 					doc.db_set("status",'Open')
 
 
