@@ -2,6 +2,12 @@
 
 
 frappe.ui.form.on('Lead', {
+    refresh(frm){
+        if (frm.doc.status != frm.doc.custom_lead_status){
+		    frm.set_df_property("custom_lead_status", "hidden", 1);
+            frm.refresh_field("custom_lead_status")
+        }
+    },
     custom_do_not_contact(frm){
         if(frm.doc.custom_do_not_contact){
             frm.set_value("status", "Do Not Contact")
