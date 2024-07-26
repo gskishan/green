@@ -3,7 +3,8 @@
 
 frappe.ui.form.on('Lead', {
     refresh(frm){
-        if (frm.doc.status != frm.doc.custom_lead_status){
+        let temp_status = ["Open",  "Lead", "Do Not Contact"]
+        if (frm.doc.status != frm.doc.custom_lead_status && !temp_status.includes(frm.doc.status)){
 		    frm.set_df_property("custom_lead_status", "hidden", 1);
             frm.refresh_field("custom_lead_status")
         }
