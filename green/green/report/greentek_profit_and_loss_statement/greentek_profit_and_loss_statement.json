@@ -1,33 +1,32 @@
 {
  "add_total_row": 0,
  "columns": [],
- "creation": "2023-09-21 19:21:51.532236",
- "disable_prepared_report": 0,
+ "creation": "2024-02-03 16:16:26.080307",
  "disabled": 0,
  "docstatus": 0,
  "doctype": "Report",
  "filters": [],
  "idx": 0,
  "is_standard": "Yes",
- "letter_head": "GIPL",
- "modified": "2023-09-21 19:21:51.532236",
+ "letterhead": null,
+ "modified": "2024-02-03 16:16:26.080307",
  "modified_by": "Administrator",
  "module": "Green",
- "name": "Greentek Project Report",
+ "name": "Greentek Profit and Loss",
  "owner": "Administrator",
  "prepared_report": 0,
- "ref_doctype": "GL Entry",
- "report_name": "G Profit and Loss Statement",
+ "ref_doctype": "Lead",
+ "report_name": "Greentek Profit and Loss",
  "report_type": "Script Report",
  "roles": [
   {
-   "role": "Accounts User"
+   "role": "Sales User"
   },
   {
-   "role": "Accounts Manager"
+   "role": "Sales Manager"
   },
   {
-   "role": "Auditor"
+   "role": "System Manager"
   }
  ]
 }
