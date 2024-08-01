@@ -87,6 +87,7 @@ def execute(filters=None):
 	for i_data, e_data in zip(income, expense):
 			entry = {
 				"i_account": i_data.get("i_account", ""),
+				"currency": i_data.get("currency", ""),
 				"i_amount": i_data.get("i_amount", 0.0),
 				"e_account": e_data.get("e_account", ""),
 				"e_amount": e_data.get("e_amount", 0.0)
