@@ -10,6 +10,18 @@ import json
 class CustomSalarySlip(SalarySlip):
 
 	@frappe.whitelist()
+	def get_late_record(self):
+		date= start_date.split("-")
+		filter={
+			'month': date[1], 
+			'year': date[0], 
+			'company': frm.doc.company, 
+			'summarized_view': 1
+			}
+		data=get_late_entries(self.employee,filter)
+		frappe.errprint(data)
+
+	@frappe.whitelist()
 	def pull_sal_struct(self):
 		from hrms.payroll.doctype.salary_structure.salary_structure import make_salary_slip
 		rt=0
@@ -53,6 +65,7 @@ def get_base_amount(employee):
 	else:
 		frappe.msgprint("issue in finding salary assigment")
 		return 0
+
 
 
 
