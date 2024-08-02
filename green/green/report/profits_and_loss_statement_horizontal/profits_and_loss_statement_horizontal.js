@@ -1,5 +1,4 @@
-
-	frappe.require("assets/erpnext/js/financial_statements.js", function() {
+frappe.require("assets/erpnext/js/financial_statements.js", function() {
 	frappe.query_reports["Profits and Loss Statement Horizontal"] = $.extend({},
 		erpnext.financial_statements);
 
