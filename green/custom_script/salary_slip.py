@@ -11,7 +11,7 @@ class CustomSalarySlip(SalarySlip):
 
 	@frappe.whitelist()
 	def get_late_record(self):
-		date= start_date.split("-")
+		date= self.start_date.split("-")
 		filter={
 			'month': date[1], 
 			'year': date[0], 
@@ -20,6 +20,16 @@ class CustomSalarySlip(SalarySlip):
 			}
 		data=get_late_entries(self.employee,filter)
 		frappe.errprint(data)
+	@frappe.whitelist()
+	def update_payment_days(self):
+		payment_days = self.get('payment_days')
+		custom_late_entry_days = self.get('custom_late_entry_days')
+	
+		if payment_days and payment_days > 1 and custom_late_entry_days >= 3:
+			new_payment_days = payment_days - (custom_late_entry_days // 3)
+			self.set('payment_days', new_payment_days)
+			frappe.errprint(new_payment_days)
+
 
 	@frappe.whitelist()
 	def pull_sal_struct(self):
