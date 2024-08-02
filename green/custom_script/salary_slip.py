@@ -18,7 +18,7 @@ class CustomSalarySlip(SalarySlip):
 			'company': self.company, 
 			'summarized_view': 1
 			}
-		filter = json.dumps(filters)
+		filter = json.dumps(filter)
 
 		data=get_late_entries(self.employee,filter)
 		frappe.errprint(data)
