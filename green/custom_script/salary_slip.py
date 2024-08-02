@@ -15,7 +15,7 @@ class CustomSalarySlip(SalarySlip):
 		filter={
 			'month': date[1], 
 			'year': date[0], 
-			'company': frm.doc.company, 
+			'company': self.company, 
 			'summarized_view': 1
 			}
 		data=get_late_entries(self.employee,filter)
