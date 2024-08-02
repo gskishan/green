@@ -71,11 +71,12 @@ def execute(filters=None):
 		period_list, filters.periodicity, income, expense, net_profit_loss, currency, filters
 	)
 
-	columns=[{'fieldname': 'i_account', 'label': 'Income Account', 'fieldtype': 'Link', 'options': 'Account', 'width': 300}, 
-		  {'fieldname': 'currency', 'label': 'Currency', 'fieldtype': 'Link', 'options': 'Currency', 'hidden': 1},
-		   {'fieldname': 'i_amount', 'label': 'Amount', 'fieldtype': 'Currency', 'options': 'currency', 'width': 150},
-		   {'fieldname': 'e_account', 'label': 'Expense Account', 'fieldtype': 'Link', 'options': 'Account', 'width': 300},
-		    {'fieldname': 'e_amount', 'label': 'Amount', 'fieldtype': 'Currency', 'options': 'currency', 'width': 150},
+	columns=[
+		{'fieldname': 'e_account', 'label': 'Expense Account', 'fieldtype': 'Data', 'width': 300},
+		{'fieldname': 'e_amount', 'label': 'Amount', 'fieldtype': 'Currency', 'options': 'currency', 'width': 150},
+		{'fieldname': 'currency', 'label': 'Currency', 'fieldtype': 'Link', 'options': 'Currency', 'hidden': 1},
+		{'fieldname': 'i_account', 'label': 'Income Account', 'fieldtype': 'Data', 'width': 300}, 
+		{'fieldname': 'i_amount', 'label': 'Amount', 'fieldtype': 'Currency', 'options': 'currency', 'width': 150},
 		   ]
 	output = []
 
@@ -90,7 +91,8 @@ def execute(filters=None):
 				"currency": i_data.get("currency", ""),
 				"i_amount": i_data.get("i_amount", 0.0),
 				"e_account": e_data.get("e_account", ""),
-				"e_amount": e_data.get("e_amount", 0.0)
+				"e_amount": e_data.get("e_amount", 0.0),
+				"indent_mark": e_data.get("indent_mark", 0.0)
 			}
 			output.append(entry)
 
@@ -277,7 +279,7 @@ def prepare_data(accounts, balance_must_be, period_list, company_currency,root_t
 			{
 			
 				"parent_account": _(d.parent_account) if d.parent_account else "",
-				# "indent": flt(d.indent),
+				"indent_mark": flt(d.indent),
 				"year_start_date": year_start_date,
 				"year_end_date": year_end_date,
 				"currency": company_currency,
@@ -305,12 +307,14 @@ def prepare_data(accounts, balance_must_be, period_list, company_currency,root_t
 				has_value = True
 				total += flt(row[period.key])
 			if root_type=="Income":
+				spaces = '⠀⠀' * int((d['indent']))  
 				row["i_amount"] = flt(d.get(period.key, 0.0), 3)
-				row["i_account"]=(d.name)
+				row["i_account"]=spaces+(d.name)
 				row["e_account"]=None
 			else:
+				spaces = '⠀⠀' * int((d['indent']))  
 				row["e_amount"] = flt(d.get(period.key, 0.0), 3)
-				row["e_account"]=(d.name)
+				row["e_account"]=spaces+(d.name)
 				row["i_account"]=None
 
 
