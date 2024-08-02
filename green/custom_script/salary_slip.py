@@ -12,16 +12,17 @@ class CustomSalarySlip(SalarySlip):
 	@frappe.whitelist()
 	def get_late_record(self):
 		date= self.start_date.split("-")
-		filter={
+		filters={
 			'month': date[1], 
 			'year': date[0], 
 			'company': self.company, 
 			'summarized_view': 1
 			}
-		filter = json.dumps(filter)
+		filters = json.dumps(filters)
 
 		data=get_late_entries(self.employee,filter)
 		frappe.errprint(data)
+
 	@frappe.whitelist()
 	def update_payment_days(self):
 		payment_days = self.get('payment_days')
