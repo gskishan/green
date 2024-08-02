@@ -1,6 +1,3 @@
-
-
-
 frappe.query_reports["Profits and Loss Statement Horizontal"] = $.extend({}, erpnext.financial_statements);
 
 erpnext.utils.add_dimensions("Profits and Loss Statement Horizontal", 10);
@@ -15,6 +12,7 @@ frappe.query_reports["Profits and Loss Statement Horizontal"]["filters"].push({
 		{ value: "Margin", label: __("Margin View") },
 	],
 	default: "Report",
+	read_only:1,
 	reqd: 1,
 });
 
@@ -31,3 +29,12 @@ frappe.query_reports["Profits and Loss Statement Horizontal"]["filters"].push({
 	fieldtype: "Check",
 	default: 1,
 });
+
+ 
+ 
+
+
+const periodicityFilter = frappe.query_reports["Profits and Loss Statement Horizontal"]["filters"].find(filter => filter.fieldname === "periodicity");
+if (periodicityFilter) {
+	periodicityFilter.read_only = 1;
+}
