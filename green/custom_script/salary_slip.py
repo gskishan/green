@@ -9,6 +9,9 @@ import json
 
 class CustomSalarySlip(SalarySlip):
 
+	def before_validate(self):
+		self.get_late_record()
+		
 	@frappe.whitelist()
 	def get_late_record(self):
 		date= self.start_date.split("-")
@@ -18,10 +21,10 @@ class CustomSalarySlip(SalarySlip):
 			'company': self.company, 
 			'summarized_view': 1
 			}
-		filters = json.dumps(filters)
 
-		data=get_late_entries(self.employee,filter)
-		frappe.errprint(data)
+		data=get_late_entries(self.employee,filters)
+		self.set("custom_late_entry_days",data.total_late_entries)
+		self.update_payment_days()
 
 	@frappe.whitelist()
 	def update_payment_days(self):
@@ -31,7 +34,6 @@ class CustomSalarySlip(SalarySlip):
 		if payment_days and payment_days > 1 and custom_late_entry_days >= 3:
 			new_payment_days = payment_days - (custom_late_entry_days // 3)
 			self.set('payment_days', new_payment_days)
-			frappe.errprint(new_payment_days)
 
 
 	@frappe.whitelist()
@@ -82,7 +84,12 @@ def get_base_amount(employee):
 
 
 
+
 @frappe.whitelist()
 def get_late_entries(employee, filters):
-	frappe.errprint(filters)
-	return get_entry_exits_summary(employee, frappe._dict(json.loads(filters)))
+    if isinstance(filters, str):
+        filters = json.loads(filters)
+    if not isinstance(filters, frappe._dict):
+        filters = frappe._dict(filters)
+    return get_entry_exits_summary(employee, filters)
+
