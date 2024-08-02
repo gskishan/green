@@ -81,4 +81,5 @@ def get_base_amount(employee):
 
 @frappe.whitelist()
 def get_late_entries(employee, filters):
+	frappe.errprint(filters)
 	return get_entry_exits_summary(employee, frappe._dict(json.loads(filters)))
