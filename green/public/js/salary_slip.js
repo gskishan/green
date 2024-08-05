@@ -49,26 +49,26 @@ function set_values(frm){
 		}
 }
 
-function recalculate_earnings_and_deductions(frm) {
-    frappe.call({
-        method: "erpnext.payroll.doctype.salary_slip.salary_slip.calculate_earnings",
-        args: { doc: frm.doc },
-        callback: function(r) {
-            if (r.message) {
-                frm.set_value("earnings", r.message.earnings);
-                frm.refresh_field("earnings");
-            }
-        }
-    });
+// function recalculate_earnings_and_deductions(frm) {
+//     frappe.call({
+//         method: "erpnext.payroll.doctype.salary_slip.salary_slip.calculate_earnings",
+//         args: { doc: frm.doc },
+//         callback: function(r) {
+//             if (r.message) {
+//                 frm.set_value("earnings", r.message.earnings);
+//                 frm.refresh_field("earnings");
+//             }
+//         }
+//     });
 
-    frappe.call({
-        method: "erpnext.payroll.doctype.salary_slip.salary_slip.calculate_deductions",
-        args: { doc: frm.doc },
-        callback: function(r) {
-            if (r.message) {
-                frm.set_value("deductions", r.message.deductions);
-                frm.refresh_field("deductions");
-            }
-        }
-    });
-}
+//     frappe.call({
+//         method: "erpnext.payroll.doctype.salary_slip.salary_slip.calculate_deductions",
+//         args: { doc: frm.doc },
+//         callback: function(r) {
+//             if (r.message) {
+//                 frm.set_value("deductions", r.message.deductions);
+//                 frm.refresh_field("deductions");
+//             }
+//         }
+//     });
+// }
