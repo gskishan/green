@@ -19,7 +19,7 @@ frappe.ui.form.on("Salary Slip", {
 			frm.refresh_field("payment_days");
 			frm.refresh_field("absent_days");
 
-			recalculate_earnings_and_deductions(frm);
+			// recalculate_earnings_and_deductions(frm);
 		}
 	}
 })
