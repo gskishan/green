@@ -42,6 +42,7 @@ class CustomSalarySlip(SalarySlip):
 
 	@frappe.whitelist()
 	def update_payment_days(self):
+		self.payment_days=self.payment_days-self.absent_days
 		payment_days = self.get('payment_days')
 		custom_late_entry_days = self.get('custom_late_entry_days')
 	
