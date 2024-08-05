@@ -33,9 +33,18 @@ class CustomSalarySlip(SalarySlip):
 		if self.custom_late_leave_days>0:
 			base=get_base_amount(self.employee)
 			rt = ((base / self.total_working_days) * self.custom_late_leave_days)
-			deduct=self.append("deductions",{})
-			deduct.salary_component="Late Attendance"
-			deduct.amount=rt
+			update=True
+			for s in self.deductions:
+				if s.salary_component=="Late Attendance":
+					s.amount=rt
+					update=False
+					
+
+					
+			if update:	
+				deduct=self.append("deductions",{})
+				deduct.salary_component="Late Attendance"
+				deduct.amount=rt
 
 
 
