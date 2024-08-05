@@ -12,16 +12,19 @@ frappe.ui.form.on("Salary Slip", {
 		set_values(frm)
 	},
 	refresh: function(frm) {
-		if (frm.doc.payment_days && frm.doc.payment_days > 1 && frm.doc.custom_late_entry_days >= 3) {
-			let adjusted_payment_days = Number(frm.doc.payment_days - Math.floor(frm.doc.custom_late_entry_days / 3));
-			frm.set_value("payment_days", adjusted_payment_days);
-			frm.set_value("absent_days", Math.floor(frm.doc.custom_late_entry_days / 3));
-			frm.refresh_field("payment_days");
-			frm.refresh_field("absent_days");
+        if (frm.doc.payment_days && frm.doc.payment_days > 1 && frm.doc.custom_late_entry_days >= 3) {
+            let adjusted_payment_days = Number(frm.doc.payment_days - Math.floor(frm.doc.custom_late_entry_days / 3));
+            let additional_absent_days = Math.floor(frm.doc.custom_late_entry_days / 3);
+            let total_absent_days = frm.doc.absent_days ? frm.doc.absent_days + additional_absent_days : additional_absent_days;
+            frm.set_value("payment_days", adjusted_payment_days);
+            frm.set_value("absent_days", total_absent_days);
+            frm.refresh_field("payment_days");
+            frm.refresh_field("absent_days");
 
-			recalculate_earnings_and_deductions(frm);
-		}
-	}
+            // Trigger recalculation of earnings and deductions
+            recalculate_earnings_and_deductions(frm);
+        }
+    }
 })
 
 function set_values(frm){
