@@ -20,9 +20,6 @@ frappe.ui.form.on("Salary Slip", {
             frm.set_value("absent_days", total_absent_days);
             frm.refresh_field("payment_days");
             frm.refresh_field("absent_days");
-
-            // Trigger recalculation of earnings and deductions
-            recalculate_earnings_and_deductions(frm);
         }
     }
 })
@@ -50,21 +47,4 @@ function set_values(frm){
 				}
 			})
 		}
-}
-
-function recalculate_earnings_and_deductions(frm) {
-    frappe.call({
-        method: "hrms.payroll.doctype.salary_slip.salary_slip.CustomSalarySlip.update_payment_days",
-        args: {
-            salary_slip_name: frm.doc.name
-        },
-        callback: function(r) {
-            if (r.message) {
-                frm.set_value("earnings", r.message.earnings);
-                frm.refresh_field("earnings");
-                frm.set_value("deductions", r.message.deductions);
-                frm.refresh_field("deductions");
-            }
-        }
-    });
 }
