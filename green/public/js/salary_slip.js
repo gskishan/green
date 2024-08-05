@@ -18,6 +18,8 @@ frappe.ui.form.on("Salary Slip", {
 			frm.set_value("absent_days", Math.floor(frm.doc.custom_late_entry_days / 3));
 			frm.refresh_field("payment_days");
 			frm.refresh_field("absent_days");
+
+			recalculate_earnings_and_deductions(frm);
 		}
 	}
 })
@@ -45,4 +47,28 @@ function set_values(frm){
 				}
 			})
 		}
+}
+
+function recalculate_earnings_and_deductions(frm) {
+    frappe.call({
+        method: "erpnext.payroll.doctype.salary_slip.salary_slip.calculate_earnings",
+        args: { doc: frm.doc },
+        callback: function(r) {
+            if (r.message) {
+                frm.set_value("earnings", r.message.earnings);
+                frm.refresh_field("earnings");
+            }
+        }
+    });
+
+    frappe.call({
+        method: "erpnext.payroll.doctype.salary_slip.salary_slip.calculate_deductions",
+        args: { doc: frm.doc },
+        callback: function(r) {
+            if (r.message) {
+                frm.set_value("deductions", r.message.deductions);
+                frm.refresh_field("deductions");
+            }
+        }
+    });
 }
