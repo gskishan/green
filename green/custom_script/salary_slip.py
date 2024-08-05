@@ -33,6 +33,7 @@ class CustomSalarySlip(SalarySlip):
 	def add_late_deduction(self):
 		if self.custom_late_leave_days>0:
 			base=get_base_amount(self.employee)
+			frappe.errprint([ self.custom_late_leave_days,base,self.total_working_days])
 			rt = ((base / self.total_working_days) * self.custom_late_leave_days)
 			update=True
 			for s in self.deductions:
