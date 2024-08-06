@@ -61,9 +61,6 @@ class CustomSalarySlip(SalarySlip):
 
 		self.get_late_record()
 
-
-	def before_validate(self):
-		self.payment_days = (self.payment_days or 0) - (self.absent_days or 0)
 		
 	@frappe.whitelist()
 	def get_late_record(self):
@@ -82,7 +79,8 @@ class CustomSalarySlip(SalarySlip):
 			self.set('custom_late_leave_days', (self.custom_late_entry_days // 3))
 			self.add_late_deduction()
 
-
+	def after_insert(self):
+		self.save()
 	@frappe.whitelist()
 	def add_late_deduction(self):
 		if self.custom_late_leave_days>0:
@@ -100,6 +98,8 @@ class CustomSalarySlip(SalarySlip):
 				deduct=self.append("deductions",{})
 				deduct.salary_component="Late Attendance"
 				deduct.amount=rt
+		self.payment_days = (self.payment_days or 0) - (self.absent_days or 0)
+
 
 
 
