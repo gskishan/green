@@ -98,7 +98,7 @@ class CustomSalarySlip(SalarySlip):
 				deduct=self.append("deductions",{})
 				deduct.salary_component="Late Attendance"
 				deduct.amount=rt
-		self.payment_days = (self.payment_days or 0) - (self.absent_days or 0)
+		#self.payment_days = (self.payment_days or 0) - (self.absent_days or 0)
 
 
 
