@@ -434,7 +434,6 @@ def get_holiday_map(filters: Filters) -> Dict[str, List[Dict]]:
 
 		holiday_map.setdefault(d, holidays)
 
-
 	return holiday_map
 
 
@@ -446,10 +445,7 @@ def get_rows(
 
 	for employee, details in employee_details.items():
 		emp_holiday_list = details.holiday_list or default_holiday_list
-		# frappe.errprint([emp_holiday_list,"emp_holiday_list"])
 		holidays = holiday_map.get(emp_holiday_list)
-		# frappe.errprint([holidays,"holidays"])
-
 
 		if filters.summarized_view:
 			attendance = get_attendance_status_for_summarized_view(employee, filters, holidays)
@@ -497,26 +493,18 @@ def get_attendance_status_for_summarized_view(
 	"""Returns dict of attendance status for employee like
 	{'total_present': 1.5, 'total_leaves': 0.5, 'total_absent': 13.5, 'total_holidays': 8, 'unmarked_days': 5}
 	"""
-	frappe.errprint("1")
 	summary, attendance_days = get_attendance_summary_and_days(employee, filters)
 	if not any(summary.values()):
 		return {}
-	frappe.errprint("2")
-	
 
 	total_days = get_total_days_in_month(filters)
 	total_holidays = total_unmarked_days = 0
 
 	for day in range(1, total_days + 1):
-		frappe.errprint("3")
-
 		if day in attendance_days:
 			continue
-		frappe.errprint("4")
-		
 
 		status = get_holiday_status(day, holidays)
-		frappe.errprint([status,"status"])
 		if status in ["Weekly Off", "Holiday"]:
 			total_holidays += 1
 		elif not status:
@@ -592,20 +580,11 @@ def get_attendance_status_for_detailed_view(
 	"""
 	total_days = get_total_days_in_month(filters)
 	attendance_values = []
-	a=([d.get("fieldname") for d in get_columns_for_days(filters)])
-	for date in a:
-		if date not in employee_attendance['General']:
-			employee_attendance['General'][date] = None
 
 
 	for shift, status_dict in employee_attendance.items():
 		row = {"shift": shift}
 		for key, status in status_dict.items():
-			status = status_dict.get(key)
-			if status is None and holidays:
-				day=int(extract_day(key))
-				status = get_holiday_status(day, holidays)
-
 			# Map the status to its abbreviation
 			abbr = status_map.get(status, "")
 			row[key] = abbr
@@ -614,7 +593,6 @@ def get_attendance_status_for_detailed_view(
 
 
 	return attendance_values
-
 
 
 def get_holiday_status(day: int, holidays: List) -> str:
@@ -747,11 +725,3 @@ def get_chart_data(attendance_map: Dict, filters: Filters) -> Dict:
 		"type": "line",
 		"colors": ["red", "green", "blue"],
 	}
-
-
-def extract_day(date_str):
-	# Split the string by underscores
-	parts = date_str.split('_')
-	# The day is the second part (index 1), so extract it and convert to integer
-	day = int(parts[1])
-	return day
