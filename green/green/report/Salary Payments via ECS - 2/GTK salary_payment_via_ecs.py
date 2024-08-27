@@ -41,7 +41,7 @@ def get_columns(filters):
 		{
 			"label" : _("IFSC Code"),
 			"fieldname" : "custom_ifsc_code",
-			"fieldtype" : "Data".
+			"fieldtype" : "Data",
 			"width" : 140,
 		},
 		{
