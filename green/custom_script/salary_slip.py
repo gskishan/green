@@ -74,11 +74,7 @@ class CustomSalarySlip(SalarySlip):
 				}
 
 			data=get_late_entries(self.employee,filters)
-			self.set("custom_late_entry_days",data.total_late_entries)
-			if self.custom_late_entry_days >= 2:
-				self.set("custom_late_entry_days", self.custom_late_entry_days - 0)
-			else:
-				self.set("custom_late_entry_days", 0) 
+			self.set("custom_late_entry_days",data.total_late_entries) 
 				
 			self.update_payment_days()
 			self.set('custom_late_leave_days', (self.custom_late_entry_days // 3))
