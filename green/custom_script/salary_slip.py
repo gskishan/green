@@ -65,25 +65,21 @@ class CustomSalarySlip(SalarySlip):
 	@frappe.whitelist()
 	def get_late_record(self):
 		if self.start_date:
-			date= self.start_date.split("-")
-			filters={
+			date = self.start_date.strftime("%Y-%m-%d").split("-")
+			filters = {
 				'month': date[1], 
 				'year': date[0], 
 				'company': self.company, 
 				'summarized_view': 1
-				}
+			}
 
-			data=get_late_entries(self.employee,filters)
-			self.set("custom_late_entry_days",data.total_late_entries) 
-			if self.custom_late_entry_days >= 2:
-				self.set("custom_late_entry_days", self.custom_late_entry_days - 2)
-			else:
-				self.set("custom_late_entry_days", 0) 
-				
-			self.update_payment_days()
+			data = get_late_entries(self.employee, filters)
+			self.set("custom_late_entry_days", data.total_late_entries) 
+			
+			# Calculate late leave days based on total late entries without any deduction
 			self.set('custom_late_leave_days', (self.custom_late_entry_days // 3))
+			self.update_payment_days()
 			self.add_late_deduction()
-
 	def after_insert(self):
 		self.save()
 	@frappe.whitelist()
