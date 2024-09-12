@@ -142,7 +142,9 @@ override_doctype_class = {
     "Stock Entry": "green.green.override.stock_entry.CustomStockEntry",
     "Expense Claim": "green.green.override.expense_claim.CustomExpenseClaim",
     "Salary Slip": "green.custom_script.salary_slip.CustomSalarySlip",
-    "Payment Reconciliation":"green.custom_script.payment_reconciliation.payment_reconciliation.CustomPaymentReconciliation"
+    "Payment Reconciliation":"green.custom_script.payment_reconciliation.payment_reconciliation.CustomPaymentReconciliation",
+"Payment Entry":"green.custom_script.payment_entry.payment_entry.CustomPaymentEntry"
+	
 }
 
 # Document Events
