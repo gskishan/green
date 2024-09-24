@@ -151,12 +151,11 @@ override_doctype_class = {
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-#     "*":{
-#         "autoname":"green.green.custom.doc_name.autoname",
-                        
-#     }
-# }
+doc_events = {
+    "Employee Checkin": {
+        "on_update": "green.green.custom_script.employee_checkin.employee_checkin.on_update",
+    }
+}
 
 # Scheduled Tasks
 # ---------------
