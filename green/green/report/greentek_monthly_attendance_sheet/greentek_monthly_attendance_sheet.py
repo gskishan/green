@@ -510,7 +510,7 @@ def get_attendance_status_for_summarized_view(
 	frappe.errprint([total_days])
 	
 
-	for day in range(1, total_days + 1):
+	for day in range(filters.from_date.day, filters.to_date.day + 1):
 		frappe.errprint([attendance_days,"d"])
 		frappe.errprint([day,"day"])
 		
