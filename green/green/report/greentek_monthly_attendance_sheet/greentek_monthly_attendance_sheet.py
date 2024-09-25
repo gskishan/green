@@ -506,9 +506,13 @@ def get_attendance_status_for_summarized_view(
 
 	total_days = get_total_days_in_month(filters)
 	total_holidays = total_unmarked_days = 0
+	frappe.errprint(summary)
+	
 
 	for day in range(1, total_days + 1):
-		frappe.errprint("3")
+		frappe.errprint(attendance_days)
+		frappe.errprint(day)
+		
 
 		if day in attendance_days:
 			continue
