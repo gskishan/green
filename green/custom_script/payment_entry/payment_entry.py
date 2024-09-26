@@ -80,4 +80,4 @@ class CustomPaymentEntry(PaymentEntry):
 		elif self.party_type == "Shareholder":
 			return ("Journal Entry",)
 		elif self.party_type == "Employee":
-			return ("Journal Entry",)
+			return ("Journal Entry","Expense Claim")
