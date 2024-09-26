@@ -10,6 +10,7 @@ import frappe
 from frappe import _
 from frappe.query_builder.functions import Count, Extract, Sum
 from frappe.utils import cint, cstr, getdate
+from frappe.utils import formatdate
 
 Filters = frappe._dict
 
@@ -29,8 +30,11 @@ day_abbr = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 def execute(filters: Optional[Filters] = None) -> Tuple:
 	filters = frappe._dict(filters or {})
 
+
 	# if not (filters.month and filters.year):
 	# 	frappe.throw(_("Please select month and year."))
+	if get_year(filters.from_date)!=get_year(filters.to_date):
+		frappe.throw("Please Select one year range ")
 
 	attendance_map = get_attendance_map(filters)
 	if not attendance_map:
@@ -396,46 +400,48 @@ def get_employee_related_details(filters: Filters) -> Tuple[Dict, List]:
 
 
 def get_holiday_map(filters: Filters) -> Dict[str, List[Dict]]:
-	"""
-	Returns a dict of holidays falling in the filter month and year
-	with list name as key and list of holidays as values like
-	{
-			'Holiday List 1': [
-					{'day_of_month': '0' , 'weekly_off': 1},
-					{'day_of_month': '1', 'weekly_off': 0}
-			],
-			'Holiday List 2': [
-					{'day_of_month': '0' , 'weekly_off': 1},
-					{'day_of_month': '1', 'weekly_off': 0}
-			]
-	}
-	"""
-	# add default holiday list too
-	holiday_lists = frappe.db.get_all("Holiday List", pluck="name")
-	default_holiday_list = frappe.get_cached_value("Company", filters.company, "default_holiday_list")
-	holiday_lists.append(default_holiday_list)
+    """
+    Returns a dict of holidays falling in the filter month and year
+    with list name as key and list of holidays as values like
+    {
+        'Holiday List 1': [
+            {'day_of_month': '0' , 'weekly_off': 1, 'holiday_date': 'YYYY-MM-DD'},
+            {'day_of_month': '1', 'weekly_off': 0, 'holiday_date': 'YYYY-MM-DD'}
+        ],
+        'Holiday List 2': [
+            {'day_of_month': '0' , 'weekly_off': 1, 'holiday_date': 'YYYY-MM-DD'},
+            {'day_of_month': '1', 'weekly_off': 0, 'holiday_date': 'YYYY-MM-DD'}
+        ]
+    }
+    """
+    # add default holiday list too
+    holiday_lists = frappe.db.get_all("Holiday List", pluck="name")
+    default_holiday_list = frappe.get_cached_value("Company", filters.company, "default_holiday_list")
+    holiday_lists.append(default_holiday_list)
 
-	holiday_map = frappe._dict()
-	Holiday = frappe.qb.DocType("Holiday")
+    holiday_map = frappe._dict()
+    Holiday = frappe.qb.DocType("Holiday")
 
-	for d in holiday_lists:
-		if not d:
-			continue
+    for d in holiday_lists:
+        if not d:
+            continue
 
-		holidays = (
-			frappe.qb.from_(Holiday)
-			.select(Extract("day", Holiday.holiday_date).as_("day_of_month"), Holiday.weekly_off)
-			.where(
-				(Holiday.parent == d)
-				  & (Holiday.holiday_date.between(filters.from_date, filters.to_date))
-			
-			)
-		).run(as_dict=True)
+        holidays = (
+            frappe.qb.from_(Holiday)
+            .select(
+                Extract("day", Holiday.holiday_date).as_("day_of_month"), 
+                Holiday.weekly_off, 
+                Holiday.holiday_date  # Added holiday_date column
+            )
+            .where(
+                (Holiday.parent == d)
+                & (Holiday.holiday_date.between(filters.from_date, filters.to_date))
+            )
+        ).run(as_dict=True)
 
-		holiday_map.setdefault(d, holidays)
+        holiday_map.setdefault(d, holidays)
 
-
-	return holiday_map
+    return holiday_map
 
 
 def get_rows(
@@ -446,9 +452,7 @@ def get_rows(
 
 	for employee, details in employee_details.items():
 		emp_holiday_list = details.holiday_list or default_holiday_list
-		# frappe.errprint([emp_holiday_list,"emp_holiday_list"])
 		holidays = holiday_map.get(emp_holiday_list)
-		# frappe.errprint([holidays,"holidays"])
 
 
 		if filters.summarized_view:
@@ -497,31 +501,23 @@ def get_attendance_status_for_summarized_view(
 	"""Returns dict of attendance status for employee like
 	{'total_present': 1.5, 'total_leaves': 0.5, 'total_absent': 13.5, 'total_holidays': 8, 'unmarked_days': 5}
 	"""
-	frappe.errprint("1")
 	summary, attendance_days = get_attendance_summary_and_days(employee, filters)
 	if not any(summary.values()):
 		return {}
-	frappe.errprint("2")
 	
 
-	total_days = get_total_days_in_month(filters)
+	total_days = get_date_range(filters)
 	total_holidays = total_unmarked_days = 0
-	frappe.errprint([summary,"s"])
-	frappe.errprint([total_days])
 	
-
-	for day in range(1, total_days + 1):
-		frappe.errprint([attendance_days,"d"])
-		frappe.errprint([day,"day"])
+	for day in total_days:
 		
 
-		if day in attendance_days:
+
+		if day.day in attendance_days:
 			continue
-		frappe.errprint("4")
 		
 
-		status = get_holiday_status(day, holidays)
-		frappe.errprint([status,"status"])
+		status = get_holiday_status(day.day, holidays)
 		if status in ["Weekly Off", "Holiday"]:
 			total_holidays += 1
 		elif not status:
@@ -534,7 +530,17 @@ def get_attendance_status_for_summarized_view(
 		"total_holidays": total_holidays,
 		"unmarked_days": total_unmarked_days,
 	}
-
+def get_date_range(filters):
+    sql="""select  date_list day from 
+(select adddate('2022-01-01',t4.i*10000 + t3.i*1000 + t2.i*100 + t1.i*10 + t0.i) date_list from
+ (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t0,
+ (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t1,
+ (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t2,
+ (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t3,
+ (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t4) v
+where date_list  BETWEEN '{0}' AND '{1}';  
+""".format(filters.from_date, filters.to_date)
+    return frappe.db.sql(sql,as_dict=1)
 
 def get_attendance_summary_and_days(employee: str, filters: Filters) -> Tuple[Dict, List]:
 	Attendance = frappe.qb.DocType("Attendance")
@@ -572,17 +578,19 @@ def get_attendance_summary_and_days(employee: str, filters: Filters) -> Tuple[Di
 	).run(as_dict=True)
 
 	days = (
-		frappe.qb.from_(Attendance)
-		.select(Extract("day", Attendance.attendance_date).as_("day_of_month"))
-		.distinct()
-		.where(
-			(Attendance.docstatus == 1)
-			& (Attendance.employee == employee)
-			& (Attendance.company == filters.company)
-		  & (Attendance.attendance_date.between(filters.from_date, filters.to_date))
-		)
+    frappe.qb.from_(Attendance)
+    .select(Attendance.attendance_date)
+    .distinct()
+    .where(
+        (Attendance.docstatus == 1)
+        & (Attendance.employee == employee)
+        & (Attendance.company == filters.company)
+        & (Attendance.attendance_date.between(filters.from_date, filters.to_date))
+    )
 	).run(pluck=True)
 
+	
+	days = [formatdate(day, "yyyy-MM-dd") for day in days]
 	return summary[0], days
 
 
@@ -604,13 +612,13 @@ def get_attendance_status_for_detailed_view(
 		if date not in employee_attendance[key] and date:
 			employee_attendance[key][date] = None
 
-
+	year=get_year(filters.to_date)
 	for shift, status_dict in employee_attendance.items():
 		row = {"shift": shift}
 		for key, status in status_dict.items():
 			status = status_dict.get(key)
 			if status is None and holidays:
-				day=int(extract_day(key))
+				day=convert_to_date_format(key, year)
 				status = get_holiday_status(day, holidays)
 
 			# Map the status to its abbreviation
@@ -628,7 +636,7 @@ def get_holiday_status(day: int, holidays: List) -> str:
 	status = None
 	if holidays:
 		for holiday in holidays:
-			if day == holiday.get("day_of_month"):
+			if day == formatdate(holiday.get("holiday_date"), "yyyy-MM-dd"):
 				if holiday.get("weekly_off"):
 					status = "Weekly Off"
 				else:
@@ -762,3 +770,49 @@ def extract_day(date_str):
 	# The day is the second part (index 1), so extract it and convert to integer
 	day = int(parts[1])
 	return day
+
+def get_year(date):
+	from datetime import datetime
+
+	date_str = date
+
+	date_obj = datetime.strptime(date_str, "%Y-%m-%d")
+
+	year = date_obj.year
+
+	return year
+
+
+from datetime import datetime
+
+def convert_to_date_format(date_str, year):
+    month_mapping = {
+        "jan": "01",
+        "feb": "02",
+        "mar": "03",
+        "apr": "04",
+        "may": "05",
+        "jun": "06",
+        "jul": "07",
+        "aug": "08",
+        "sep": "09",
+        "oct": "10",
+        "nov": "11",
+        "dec": "12"
+    }
+
+    parts = date_str.split("_")
+
+    month_str = parts[0]  
+    day_str = parts[1]   
+
+    month_num = month_mapping.get(month_str)
+    
+    if month_num is None:
+        raise ValueError("Invalid month abbreviation")
+
+
+    year=int(year)
+    formatted_date = f"{year}-{month_num}-{day_str.zfill(2)}"
+
+    return formatted_date
