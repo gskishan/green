@@ -65,7 +65,10 @@ class CustomSalarySlip(SalarySlip):
 	@frappe.whitelist()
 	def get_late_record(self):
 		if self.start_date:
-			date = self.start_date.strftime("%Y-%m-%d").split("-")
+			if isinstance(self.start_date, str):
+            			date = self.start_date.split("-")
+        		else:
+           		 	date = self.start_date.strftime("%Y-%m-%d").split("-")
 			filters = {
 				'month': date[1], 
 				'year': date[0], 
