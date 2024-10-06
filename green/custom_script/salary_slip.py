@@ -4,7 +4,7 @@ from hrms.payroll.doctype.salary_slip.salary_slip import SalarySlip
 from hrms.payroll.doctype.salary_slip.salary_slip import *
 from frappe.utils import flt
 from hrms.hr.utils import validate_active_employee
-from hrms.hr.report.monthly_attendance_sheet.monthly_attendance_sheet import get_entry_exits_summary
+from green.report.greentek_monthly_attendance_sheet.greentek_monthly_attendance_sheet import get_entry_exits_summary
 import json
 from frappe.utils import (
 	add_days,
