@@ -67,7 +67,7 @@ class CustomSalarySlip(SalarySlip):
 			}
 
 			data = get_late_entries(self.employee, filters)
-			frappe.log_error(f"", "get_late_entries Debug")
+			frappe.log_error(f"Returned Data: {data}", "get_late_entries Debug")
 			frappe.log_error(f"Returned Data: {data}", "get_late_entries Debug")
 			self.set("custom_late_entry_days", data.total_late_entries)
 
