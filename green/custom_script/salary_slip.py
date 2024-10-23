@@ -117,4 +117,5 @@ def get_late_entries(employee, filters):
 		filters = json.loads(filters)
 	if not isinstance(filters, frappe._dict):
 		filters = frappe._dict(filters)
+	frappe.log_error(f"Employee: {employee}, Filters: {filters}", "get_late_entries Debug")
 	return get_entry_exits_summary(employee, filters)
