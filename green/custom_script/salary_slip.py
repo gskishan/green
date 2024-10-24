@@ -63,11 +63,11 @@ class CustomSalarySlip(SalarySlip):
 				'month': date[1],
 				'year': date[0],
 				'company': self.company,
-				'summarized_view': 1
+				'summarized_view': 1,
+				'companies': [self.company]
 			}
 
 			data = get_late_entries(self.employee, filters)
-			frappe.log_error(f"Returned Data: {data}", "get_late_entries Debug")
 			self.set("custom_late_entry_days", data.total_late_entries)
 
 			# Calculate late leave days based on total late entries without any deduction
@@ -118,5 +118,5 @@ def get_late_entries(employee, filters):
 		filters = json.loads(filters)
 	if not isinstance(filters, frappe._dict):
 		filters = frappe._dict(filters)
-	frappe.log_error(f"Employee: {employee}, Filters: {filters}", "get_late_entries Debug")
+	# frappe.log_error(f"Employee: {employee}, Filters: {filters}", "get_late_entries Debug")
 	return get_entry_exits_summary(employee, filters)
