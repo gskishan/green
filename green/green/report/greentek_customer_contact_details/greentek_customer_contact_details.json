@@ -1,0 +1,73 @@
+{
+ "add_total_row": 0,
+ "columns": [
+  {
+   "fieldname": "customer_id",
+   "fieldtype": "Link",
+   "label": "Customer ID",
+   "options": "Customer",
+   "width": 0
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name",
+   "width": 0
+  },
+  {
+   "fieldname": "customer_group",
+   "fieldtype": "Data",
+   "label": "Customer Group",
+   "width": 0
+  },
+  {
+   "fieldname": "territory",
+   "fieldtype": "Data",
+   "label": "Territory",
+   "width": 0
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State",
+   "width": 0
+  },
+  {
+   "fieldname": "mobile_no",
+   "fieldtype": "Data",
+   "label": "Mobile No",
+   "width": 0
+  },
+  {
+   "fieldname": "email_id",
+   "fieldtype": "Data",
+   "label": "Email Id",
+   "width": 0
+  }
+ ],
+ "creation": "2024-11-15 13:06:18.551416",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "json": "{}",
+ "letterhead": null,
+ "modified": "2024-11-15 13:42:28.187491",
+ "modified_by": "Administrator",
+ "module": "Green",
+ "name": "Greentek Customer Contact Details",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "Select \n    ct.name As customer_id,\n    ct.customer_name,\n    ct.customer_group,\n    ct.territory,\n    ad.state,\n    ad.phone AS mobile_no,\n    ad.email_id\n    \nFrom\n    `tabCustomer`ct\nInner Join\n    `tabDynamic Link` dl\n    ON\n        dl.link_doctype = \"Customer\"\n    AND dl.link_name = ct.name\nInner Join\n    `tabAddress` ad\n    ON\n        ad.name = dl.parent\n\n    \n    ",
+ "ref_doctype": "Customer",
+ "report_name": "Greentek Customer Contact Details",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ],
+ "timeout": 0
+}
