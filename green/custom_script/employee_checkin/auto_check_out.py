@@ -22,6 +22,7 @@ def auto_checkout_employees():
         WHERE 
             ec.log_type = 'IN'
             AND DATE(ec.time) = CURDATE()
+             AND e.company = 'GTK Software Solutions LLP'
             AND NOT EXISTS (
                 SELECT 
                     1
