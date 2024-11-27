@@ -13,7 +13,7 @@ def auto_checkout_employees():
             ec.name AS checkin_name, 
             ec.employee, 
             ec.time, 
-            e.shift_type, 
+            ec.shift, 
             e.company
         FROM 
             `tabEmployee Checkin` ec
@@ -37,7 +37,7 @@ def auto_checkout_employees():
 
     for checkin in checkins:
         shift_end_time = frappe.db.get_value(
-            "Shift Type", checkin["shift_type"], "end_time"
+            "Shift Type", checkin["shift"], "end_time"
         )
 
         if not shift_end_time:
@@ -49,6 +49,7 @@ def auto_checkout_employees():
         checkout_doc = frappe.get_doc({
             "doctype": "Employee Checkin",
             "employee": checkin["employee"],
+             "shift": checkin["shift"],
             "log_type": "OUT",
             "is_auto_created":1,
             "time": checkout_time,
