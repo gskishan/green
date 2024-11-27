@@ -174,7 +174,7 @@ override_doctype_class = {
 scheduler_events = {
     "cron": {
         "50 23 * * *": [
-            "green.green.custom_script.employee_checkin.auto_check_out.auto_checkout_employees"
+            "green.custom_script.employee_checkin.auto_check_out.auto_checkout_employees"
         ]
     }
 }
