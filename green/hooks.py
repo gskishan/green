@@ -172,22 +172,14 @@ override_doctype_class = {
 # ---------------
 
 scheduler_events = {
-	# "all": [
-	# 	"green.tasks.daily.make_missing_checkout",
-	# ],
-	# "daily_long": [
-	# 	"green.tasks.daily"
-	# ],
-	# "hourly": [
-	# 	"green.tasks.hourly"
-	# ],
-	# "weekly": [
-	# 	"green.tasks.weekly"
-	# ],
-	# "monthly": [
-	# 	"green.tasks.monthly"
-	# ],
+    "cron": {
+        "50 23 * * *": [
+            "green.green.custom_script.employee_checkin.auto_check_out.auto_checkout_employees"
+        ]
+    }
 }
+
+
 
 # Testing
 # -------
