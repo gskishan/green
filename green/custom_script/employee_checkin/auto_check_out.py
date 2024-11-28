@@ -21,7 +21,7 @@ def auto_checkout_employees():
             `tabEmployee` e ON e.name = ec.employee
         WHERE 
             ec.log_type = 'IN'
-            AND DATE(ec.time) = CURDATE()
+            AND DATE(ec.time) = %(today_date)s
              AND e.company = 'GTK Software Solutions LLP'
             AND NOT EXISTS (
                 SELECT 
@@ -31,9 +31,10 @@ def auto_checkout_employees():
                 WHERE 
                     ec_out.log_type = 'OUT'
                     AND ec_out.employee = ec.employee
-                    AND DATE(ec_out.time) = CURDATE()
+                    AND DATE(ec_out.time) = %(today_date)s
             )
-    """, as_dict=True)
+    """, {"today_date": today_date}, as_dict=True)
+
 
     for checkin in checkins:
         shift_end_time = frappe.db.get_value(
