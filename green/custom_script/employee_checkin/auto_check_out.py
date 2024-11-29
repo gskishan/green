@@ -11,7 +11,9 @@ def auto_checkout_employees():
     checkins = frappe.db.sql("""
         SELECT 
             ec.name AS checkin_name, 
-            ec.employee, 
+            ec.employee,
+            ec.longitude,
+            ec.latitude,
             ec.time, 
             ec.shift, 
             e.company
@@ -54,8 +56,8 @@ def auto_checkout_employees():
             "log_type": "OUT",
             "is_auto_created":1,
             "time": checkout_time,
-            "longitude":78.506336717,
-            "latitude":17.45166747
+            "longitude":checkin["longitude"],
+            "latitude":checkin["latitude"]
             
         })
         checkout_doc.insert(ignore_permissions=True)
