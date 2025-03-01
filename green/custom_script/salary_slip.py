@@ -104,13 +104,24 @@ class CustomSalarySlip(SalarySlip):
 			self.set('payment_days', new_payment_days)
 
 def get_base_amount(employee):
-	sql = """select base from `tabSalary Structure Assignment` where employee="{0}" """.format(employee)
-	base = frappe.db.sql(sql, as_dict=True)
-	if base:
-		return base[0].base
-	else:
-		frappe.msgprint("issue in finding salary assignment")
-		return 0
+    # Fetch CTC from Employee doctype
+    base_salary = frappe.db.get_value("Employee", employee, "ctc")
+
+    # If CTC is not found in Employee, fetch from Salary Structure Assignment
+    if not base_salary:
+        sql = """
+            SELECT base FROM `tabSalary Structure Assignment`
+            WHERE employee = %s
+            ORDER BY from_date DESC
+            LIMIT 1
+        """
+        assignment = frappe.db.sql(sql, (employee,), as_dict=True)
+        base_salary = assignment[0].base if assignment else 0
+
+    # Log and return base salary
+    frappe.msgprint(_("Base salary (CTC) fetched for Employee {0}: {1}").format(employee, base_salary))
+
+    return base_salary if base_salary else 0
 
 @frappe.whitelist()
 def get_late_entries(employee, filters):
