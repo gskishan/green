@@ -125,9 +125,13 @@ def get_base_amount(employee):
 
 @frappe.whitelist()
 def get_late_entries(employee, filters):
-	if isinstance(filters, str):
-		filters = json.loads(filters)
-	if not isinstance(filters, frappe._dict):
-		filters = frappe._dict(filters)
-	# frappe.log_error(f"Employee: {employee}, Filters: {filters}", "get_late_entries Debug")
-	return get_entry_exits_summary(employee, filters)
+    if isinstance(filters, str):
+        filters = json.loads(filters)
+    if not isinstance(filters, frappe._dict):
+        filters = frappe._dict(filters)
+
+    # Debugging logs to check filters
+    frappe.log_error(f"Fetching late entries for {employee} from {filters.get('from_date')} to {filters.get('to_date')}", "get_late_entries Debug")
+
+    # Fetch late entries based on the salary period (not just a single month)
+    return get_entry_exits_summary(employee, filters)
