@@ -38,25 +38,45 @@ class CustomSalarySlip(SalarySlip):
 
         self.get_late_record()
 
+    # @frappe.whitelist()
+    # def get_late_record(self):
+    #     """Fetch late entries and calculate deductions."""
+    #     if self.start_date:
+    #         date_parts = str(getdate(self.start_date)).split("-")
+    #         filters = {
+    #             'month': date_parts[1],
+    #             'year': date_parts[0],
+    #             'company': self.company,
+    #             'summarized_view': 1,
+    #             'companies': [self.company]
+    #         }
+
+    #         data = get_late_entries(self.employee, filters)
+    #         total_late_entries = data.get("total_late_entries", 0)
+
+    #         self.set("custom_late_entry_days", total_late_entries)
+    #         self.set("custom_late_leave_days", total_late_entries // 3)
+
+    #         self.update_payment_days()
+    #         self.add_late_deduction()
     @frappe.whitelist()
     def get_late_record(self):
         """Fetch late entries and calculate deductions."""
-        if self.start_date:
-            date_parts = str(getdate(self.start_date)).split("-")
+        if self.start_date and self.end_date:
+            
             filters = {
-                'month': date_parts[1],
-                'year': date_parts[0],
-                'company': self.company,
-                'summarized_view': 1,
-                'companies': [self.company]
+                "from_date": self.start_date,
+                "to_date": self.end_date,
+                "company": self.company,
+                "summarized_view": 1,
+                "companies": [self.company]
             }
-
             data = get_late_entries(self.employee, filters)
             total_late_entries = data.get("total_late_entries", 0)
-
+            
             self.set("custom_late_entry_days", total_late_entries)
             self.set("custom_late_leave_days", total_late_entries // 3)
-
+            
             self.update_payment_days()
             self.add_late_deduction()
 
