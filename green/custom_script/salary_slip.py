@@ -43,12 +43,14 @@ class CustomSalarySlip(SalarySlip):
         """Fetch late entries and calculate deductions."""
         if self.start_date:
             date_parts = str(getdate(self.start_date)).split("-")
+
             filters = {
-                'month': date_parts[1],
-                'year': date_parts[0],
-                'company': self.company,
-                'summarized_view': 1,
-                'companies': [self.company]
+                "filter_based_on": "Month",
+                "month": str(int(date_parts[1])),
+                "year": date_parts[0],
+                "company": self.company,
+                "summarized_view": 1,
+                "companies": [self.company]
             }
 
             data = get_late_entries(self.employee, filters)
